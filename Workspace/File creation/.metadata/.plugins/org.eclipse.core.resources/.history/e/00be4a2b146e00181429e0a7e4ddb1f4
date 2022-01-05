@@ -1,0 +1,30 @@
+package NoticeCreation;
+
+import net.sourceforge.htmlunit.corejs.javascript.regexp.SubString;
+
+public class createVTR {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		 String Filedate = "20180515";
+		 String YYYY = Filedate.substring(0, 4);
+		 String MM = Filedate.substring(4, 6);
+		 String DD = Filedate.substring(6, 8);
+		 String header = "H012.0";
+		 String headertext = null; 
+	     String Trailertext= null;
+	     String Filename = null;
+	     
+	     String xfer = "90126789";
+	     xfer10 = "";
+	     
+	     System.out.println(MM);
+	    
+         headertext = header+ xfer10 + AgencyID + YYYY + MM+ DD + HHMMSS + ARecordCount;
+//        Trailertext = Trailer + ARecordCount + Checksum;
+//        Filename = "v" + YYYY + MM + DD + HHMMSS + AgencyID + Fileext;
+
+	}
+
+}

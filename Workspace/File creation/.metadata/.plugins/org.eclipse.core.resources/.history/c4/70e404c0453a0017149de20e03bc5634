@@ -1,0 +1,33 @@
+package Research;
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.Set;
+
+import org.reflections.Reflections;
+
+import Testcases.accountCreationMaintenance.testcaseselector;
+
+
+
+public class classcheck {
+	
+	 public static void main(String[] args) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException, IllegalArgumentException, InvocationTargetException {
+	    	
+		 String funClass = "Research.reporttest";
+		 Class c = Class.forName(funClass);
+
+		 //Step2 - instantiate an object of the class abov
+		 Object o = c.newInstance();
+		 //Prepare array of the arguments that your function accepts, lets say only one string here
+		 Class[] paramTypes = new Class[1];
+		 paramTypes[0]=String.class;
+		 String methodName = "verifytitle";
+		 //Instantiate an object of type method that returns you method name
+		  Method m = c.getDeclaredMethod(methodName, paramTypes);
+		 //invoke method with actual params
+		 m.invoke(o);
+		
+	    }
+
+}

@@ -1,0 +1,149 @@
+package Creationpages;
+import com.vector.func.*;
+
+
+
+
+
+
+
+import java.awt.AWTException;
+import java.io.IOException;
+import java.util.Random;
+
+import org.apache.poi.EncryptedDocumentException;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.Wait;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import com.relevantcodes.extentreports.LogStatus;
+import com.vector.func.Genric;
+import com.vector.func.ReportLibrary;
+import com.vector.func.SuperTestNG;
+
+
+
+public class TagsandPaymentPage extends SuperTestNG {
+	
+	static Genric  g = new Genric();
+	
+	@FindBy (xpath ="(.//div[@class='Welcome'])[1]")
+	private WebElement welcomeMsg;
+
+	
+	@FindBy (xpath ="//select[@name='countryType']")
+	private WebElement xpathCountry;
+
+
+	
+	
+ 
+//    public static String siebelURL1="http://10.36.20.4/callcenter_enu/start.swe?";
+//    public static String loginUsernameTxtBox1="id=s_swepi_1";
+//    public static String loginPasswordTxtBox1="id=s_swepi_2";
+//    public static String signInBtn1=".//*[@id='s_swepi_22']";
+//
+//    public static String xpathSecondaryFirstName="//input[@name='contactnamesid[0].secondaryFirstName']";
+//    public static String xpathSecondaryMiddleName="//input[@name='contactnamesid[0].secondaryMiddleName']";
+//    public static String xpathSecondaryLastName="//input[@name='contactnamesid[0].secondaryLastName']";
+//    public static String xpathAddSecondaryContactBtn="//a[contains(text(),'+ Add Secondary Contact ')]";    
+    
+
+	
+	public TagsandPaymentPage(WebDriver driver)
+	{
+		
+		this.driver = driver;
+		PageFactory.initElements(driver, this);
+		
+	}
+		
+	
+	
+	
+	public void filltagSection(int Rownum) 
+	{
+		
+		try {  
+				
+		    String country = g.ExcelRead(accountype, Sheetpath, Rownum, 10);		   
+		    String state = g.ExcelRead(accountype, Sheetpath, Rownum, 8);
+		    String platetype = g.ExcelRead(accountype, Sheetpath, Rownum, 19);
+		    String vehicletype = g.ExcelRead(accountype, Sheetpath, Rownum, 20); 
+		    String pmake = g.ExcelRead(accountype, Sheetpath, Rownum, 21); 
+		    String pmodel = g.ExcelRead(accountype, Sheetpath, Rownum, 22); 
+		    String pyear = g.ExcelRead(accountype, Sheetpath, Rownum, 23); 
+		    
+		  
+		   	    
+		    addplate(driver, country,state, platetype, vehicletype, pmake, pmodel,pyear) ; 
+		  //  ReportLibrary.addStep(ReportLibrary.Test_Step_Number, "Adding contact details in first page", LogStatus.INFO, true);
+		    
+		    	
+		    
+			
+		}
+		catch(Exception allexception)
+		{
+			System.out.println("Error occured in filling account details "+allexception.getMessage());
+		}
+	}
+	
+	
+	
+	
+	public static char randomCharacter() {
+		Random r = new Random();
+		char c = (char)(r.nextInt(26) + 'a');
+		return c;
+	}
+	
+	
+	
+	
+	
+	public void addplate(WebDriver driver,String country,String state,String platetype,String vehicletype,String pmake, String pmodel,String pyear)
+	{
+		   
+		
+		    int RandomNum =  1000 +(int)(Math.random() * 9999); 
+		    String pname = randomCharacter()+(RandomNum+"")+randomCharacter();
+		    
+		WebElement plate_number =driver.findElement(By.xpath("//input[@name='vehicleid[0].vehicleLicense']"));
+		plate_number.sendKeys(pname);
+        		
+		Select dropdown0 = new Select(driver.findElement(By.xpath("//select[@name='vehicleid[0].vehicleCountry']")));
+		dropdown0.selectByIndex(Integer.parseInt(country));
+		
+		WebElement plate_state =driver.findElement(By.xpath("//select[@name='vehicleid[0].vehicleCountry']"));
+		plate_state.sendKeys(state);
+		
+		Select dropdown2 = new Select(driver.findElement(By.xpath("//select[@name='vehicleid[0].vehicleCountry']")));
+		dropdown2.selectByIndex(Integer.parseInt(platetype));
+		
+		Select dropdown3 = new Select(driver.findElement(By.xpath("//select[@name='vehicleid[0].vehicleType']")));
+		dropdown3.selectByIndex(Integer.parseInt(vehicletype));
+		
+		Select dropdown4 = new Select(driver.findElement(By.xpath("//select[@name='vehicleid[0].vehicleMake']")));
+		dropdown4.selectByIndex(Integer.parseInt(pmake));
+		
+		Select dropdown5 = new Select(driver.findElement(By.xpath("//select[@name='vehicleid[0].vehicleModel']")));
+		dropdown5.selectByIndex(Integer.parseInt(pmodel));
+		
+		
+		WebElement year= driver.findElement(By.xpath("//input[@name='vehicleid[0].vehicleYear']"));
+		year.sendKeys(pyear);
+        
+	    
+		
+	}
+	
+
+}

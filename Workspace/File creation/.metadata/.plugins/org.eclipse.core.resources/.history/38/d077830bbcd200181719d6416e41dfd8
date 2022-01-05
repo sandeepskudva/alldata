@@ -1,0 +1,13 @@
+package Safeform;
+
+public class clockAngle {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		float Currenttime = '1.30';
+		
+
+	}
+
+}

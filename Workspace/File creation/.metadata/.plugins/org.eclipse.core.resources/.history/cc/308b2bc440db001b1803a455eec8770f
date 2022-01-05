@@ -1,0 +1,35 @@
+
+public class checkProgram {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		int num = 111;
+		System.out.println(ispalindrome(text));
+	}
+
+	
+	public static boolean ispalindrome(String text)
+	{
+		String reverse = "";
+		for (int i = text.length()-1; i >= 0; i--)
+		reverse = reverse + text.charAt(i);
+		if(text.equals(reverse))
+		return true;
+		else		
+		return false;	
+		
+	}
+	
+	public static boolean nearestup(int num)
+	{
+		String reverse = "";
+		for (int i = text.length()-1; i >= 0; i--)
+		reverse = reverse + text.charAt(i);
+		if(text.equals(reverse))
+		return true;
+		else		
+		return false;	
+		
+	}
+}

@@ -1,0 +1,26 @@
+package NoticeCreation;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
+public class dateCheck {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("dd-M-yyyy hh:mm:ss");
+		String dateInString = "31-08-1982 10:20:56";
+		Date date = sdf.parse(dateInString);
+		System.out.println(date);
+		
+		
+		int hoursToAdd = 2; //or from input
+		Calendar calendar = Calendar.getInstance();
+		calendar.add(Calendar.HOUR, hoursToAdd);
+		System.out.println(new SimpleDateFormat("yyyyMMddHHmmss").format(calendar.getTime()));
+
+	}
+
+}

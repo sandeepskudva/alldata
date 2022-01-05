@@ -1,0 +1,21 @@
+package Filetransfer;
+
+import java.io.InputStream;
+
+
+public class remoteconnect {
+
+	public static void main(String[] args) {
+
+	
+		Process p = Runtime.getRuntime().exec("cmdkey /generic:"+ip+" /user:"+userName+" /pass:"+password );
+		p.destroy();
+
+		Runtime.getRuntime().exec("mstsc /v: "+ip+" /f /console");
+
+		Thread.sleep(2*60*1000); // min sec millisec
+		// deleting credentials
+		Process p1 = Runtime.getRuntime().exec("cmdkey /delete:"+ip);
+		p1.destroy();
+	 }
+

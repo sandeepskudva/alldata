@@ -1,0 +1,21 @@
+	package Research;
+
+import java.io.IOException;
+import java.sql.SQLException;
+
+
+import org.apache.poi.EncryptedDocumentException;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+
+import com.vector.func.Genric;
+
+import ch.qos.logback.core.net.SyslogOutputStream;
+
+public class RemoveConsequetive {
+
+	public static void main(String[] args) throws SQLException, EncryptedDocumentException, InvalidFormatException, IOException, ClassNotFoundException {
+
+	
+	}
+	
+}

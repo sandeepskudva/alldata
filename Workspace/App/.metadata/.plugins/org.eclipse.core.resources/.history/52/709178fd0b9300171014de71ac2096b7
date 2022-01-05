@@ -1,0 +1,91 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1" import="com.sch.pkg.*, java.util.*, java.lang.*, com.jcraft.jsch.*,org.apache.poi.*,java.sql.*" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Schedular- QA</title>
+<link rel ="stylesheet" href="CSS/indexStyle.css">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="E://TSG/Workspace/App/WebApp-01/WebContent/WEB-INF/libjquery-3.1.1.min.js"></script>
+<script type="text/javascript">
+$(window).load(function() {
+	$(".loader").fadeOut("slow");
+	
+})
+
+</script>
+
+
+
+</head>
+<body>
+<div class="loader"></div>
+<div id="left"></div>
+<div id="right"></div>
+<div id="top"></div>
+<div id="bottom"></div>
+<div class="loader"></div>
+<div class="stitched">
+<h1>Request Image Details Page</h1>
+</div>
+<nav>
+  <ul class="top-menu">
+    <li><a href="index.jsp">Home</a><div class="menu-item" id="home"></div></li>
+    <li><a href="CreateNew.jsp">Create New Set</a><div class="menu-item" id="CreateNew"></div></li>
+    <li><a href="ExistingViolations.jsp">OpenExisting</a><div class="menu-item" id="OpenExisting"></div></li>
+    <li><a href="contact.jsp">Contact</a><div class="menu-item" id="contact"></div></li>
+    <li><a href="about.jsp">About</a><div class="menu-item" id="About"></div></li>
+  </ul>
+</nav>
+<form font-size="75px;" name="verification">
+
+<table style="width:40%" border="2">
+
+ <tr style ="background : Navy">
+<td align="center"><whi/>Plate State</td>
+<td align="center"><whi/>Plate Number</td>
+<td align="center"><whi/>Verify Plate</td>
+</tr>
+
+  <tr>
+     <td align="center"><input type ="text" id ="plateState" name ="plateState"/></td> 
+    <td align="center"><input type ="text" id ="plateNumber" name ="plateNumber"/></td> 
+    <td align="center"><input type ="button" id ="vplate" name ="vplate" value="Verify Plate" onClick ="verifyVehicle()"/></td> 
+  <script type="text/javascript">
+function verifyVehicle()
+{
+	
+	
+	var plate_state = document.forms["verification"].plateState.value;
+	var plate_number = document.forms["verification"].plateNumber.value;
+	console.log(plate_state);
+	
+
+	$.ajax({
+		 type: 'GET',
+		    url: "/WebApp-01//buttonServlet?state="+plate_state,
+		    success: function(data, status, xhr) {
+		        var code1 = xhr.getResponseHeader('plate_state');	 
+		       
+		        console.log("Success"+code1+code2);
+		    }
+		});
+}
+
+
+
+</script>
+    
+
+ 
+    
+    
+  </tr> 
+</table>
+	
+</form>
+</body>
+</html>
+
+

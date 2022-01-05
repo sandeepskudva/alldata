@@ -1,0 +1,72 @@
+package Pack1;
+
+
+
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+public class class1 {
+	
+	
+	static void alwayswait(int timeinseconds) throws InterruptedException
+	{
+		Thread.sleep(timeinseconds * 1000);
+		System.out.println(timeinseconds+" seconds Wait is over");
+	}
+
+	static void controlplus(WebDriver driver,String character)
+	{
+		Actions actionObj = new Actions(driver);
+	    actionObj.keyDown(Keys.CONTROL)
+	             .sendKeys(Keys.chord(character))
+	             .keyUp(Keys.CONTROL)
+	             .perform();
+	}
+
+	public static void main(String args[]) throws InterruptedException
+	{
+	    WebDriver driver = new FirefoxDriver();
+	    driver.get("http://10.36.20.30/callcenter_enu/start.swe?");
+	    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+	    driver.manage().window().maximize();
+	    WebElement username = driver.findElement(By.id("s_swepi_1"));
+	    WebElement password = driver.findElement(By.id("s_swepi_2"));
+	    WebElement Loginbtn = driver.findElement(By.xpath("//input[@value='Login']"));
+	    username.sendKeys("tester9");
+	    password.sendKeys("Welcome1");
+	    Loginbtn.click();
+	    alwayswait(60);
+	    
+	    WebElement accOpentab =driver.findElement(By.xpath("//a[contains(text(),'Account Opening')]"));
+	    accOpentab.click();
+	    WebElement commerical = driver.findElement(By.xpath("//li[a[contains(text(),'Commercial')]]"));
+	    commerical.click();
+	    alwayswait(10);
+	   // controlplus(driver, "N");
+        WebElement addbtn = driver.findElement(By.xpath("//button[@id='s_2_1_50_0_Ctrl']")); 
+        addbtn.click();
+        alwayswait(5);
+	    WebElement pin = driver.findElement(By.xpath("//input[@name='s_2_1_24_0']"));
+	    pin.sendKeys("1234");
+	    
+	    WebElement challengeAnswer = driver.findElement(By.xpath("//input[@name='s_2_1_41_0']"));
+	    challengeAnswer.sendKeys("1234");
+	    //name="s_1_1_31_0
+	    
+	    
+	    
+	    
+		//System.out.println("hi");
+		
+	}
+	
+}
+

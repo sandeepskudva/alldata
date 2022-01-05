@@ -1,0 +1,556 @@
+package com.sch.pkg;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.PrintStream;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
+import org.apache.poi.EncryptedDocumentException;
+
+import com.Ostermiller.util.LineEnds;
+import com.jcraft.jsch.Channel;
+
+import com.jcraft.jsch.ChannelSftp;
+import com.jcraft.jsch.JSch;
+import com.jcraft.jsch.JSchException;
+import com.jcraft.jsch.Session;
+import com.jcraft.jsch.SftpException;
+import com.sun.media.sound.InvalidFormatException;
+
+public class uploadFile {
+
+	public static String feedFile(String Filedate,String filetime, String Txndate,int count)  {
+
+	
+	
+  
+	
+	try {
+		
+		String[] s1 =Txndate.split("-");
+		Txndate = s1[0]+s1[1]+s1[2];	
+		System.out.println(Txndate);
+		
+		String[] s2 =Filedate.split("-");
+		System.out.println(s1[2]+s2[1]+s2[0]);
+		
+		
+		common.ExcelWrite("Inputs", "E:\\TSG\\Workspace\\App\\WebApp-01\\NJTPViolMacro.xlsm", 3, 11, count+"");
+		
+		
+		common.ExcelWrite("Inputs", "E:\\TSG\\Workspace\\App\\WebApp-01\\NJTPViolMacro.xlsm", 3, 64, Txndate);
+		common.ExcelWrite("Inputs", "E:\\TSG\\Workspace\\App\\WebApp-01\\NJTPViolMacro.xlsm", 3, 68, Txndate);		
+		common.ExcelWrite("Data3", "E:\\TSG\\Workspace\\App\\WebApp-01\\NJTPViolMacro.xlsm", 2, 1, s2[2]);
+		common.ExcelWrite("Data3", "E:\\TSG\\Workspace\\App\\WebApp-01\\NJTPViolMacro.xlsm", 3, 1, s2[1]);
+		common.ExcelWrite("Data3", "E:\\TSG\\Workspace\\App\\WebApp-01\\NJTPViolMacro.xlsm", 4, 1, s2[0]);
+		common.ExcelWrite("Data3", "E:\\TSG\\Workspace\\App\\WebApp-01\\NJTPViolMacro.xlsm", 5, 1, filetime);
+		
+		
+		
+		
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	 return "";
+	
+	}
+	
+	
+	
+	public static String createFile() throws EncryptedDocumentException, InvalidFormatException, org.apache.poi.openxml4j.exceptions.InvalidFormatException, IOException
+	{
+		 Runtime.getRuntime().exec("explorer "+"E:\\TSG\\Workspace\\App\\WebApp-01\\MacroSM.vbs"); 
+		     
+		return "";
+	}
+	
+	public static String convertToUnix(String filename)  
+	{
+		 
+		 File f = new File("E:\\TSG\\Workspace\\App\\WebApp-01\\Files\\"+filename);
+		 int style = LineEnds.STYLE_UNIX;
+		 try {
+			LineEnds.convert(f, style);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		 try {
+			Thread.sleep(2000);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	    
+		return "";
+	}
+	
+	
+	public static String getFileName() throws EncryptedDocumentException, InvalidFormatException, org.apache.poi.openxml4j.exceptions.InvalidFormatException, IOException
+	{
+		String filename =common.ExcelRead("Data3", "E:\\TSG\\Workspace\\App\\WebApp-01\\NJTPViolMacro.xlsm", 24, 1);		
+		return filename;
+		
+	}
+	
+	public static String insertxferinFile(String xfer) throws EncryptedDocumentException, InvalidFormatException, org.apache.poi.openxml4j.exceptions.InvalidFormatException, IOException, InterruptedException
+	{
+		
+		common.ExcelWrite("Data3", "E:\\TSG\\Workspace\\App\\WebApp-01\\NJTPViolMacro.xlsm", 6, 1,xfer);	
+		System.out.println("Written to excel :"+xfer);
+		
+		return "";
+		
+	}
+	
+	public static String getxferid(String filename) throws SQLException
+	{
+		
+		
+		
+			DriverManager.registerDriver( new oracle.jdbc.driver.OracleDriver()); 
+		    String dbURL = "jdbc:oracle:thin:@(DESCRIPTION =(ADDRESS = (PROTOCOL = TCP)(HOST = 10.36.20.51)(PORT = 1521))(CONNECT_DATA = (SERVER = DEDICATED)(SERVICE_NAME = njrbtst)))";
+		    String strUserID = "pbatch";
+		    String strPassword = "batchp"; 
+		    Connection c=DriverManager.getConnection(dbURL,strUserID,strPassword);
+		    
+		    String Statement = "select XFER_CONTROL_ID from t_xfer_control where XFER_FILE_NAME = '"+filename+"'"; 
+		    
+		    ResultSet rs = c.createStatement().executeQuery(Statement);
+		    String xfer = null;
+		   
+		    while(rs.next()){
+		    	xfer =rs.getString("XFER_CONTROL_ID");  
+		    }
+		   
+		    if(xfer==null)
+		    {	
+		    	xfer = "NULL";		  
+
+		    }
+		  	    
+			c.close();
+			return xfer;
+		}
+	
+	
+	public static String getViol_tx_status(String xferid) throws SQLException
+	{
+		
+		
+		
+			DriverManager.registerDriver( new oracle.jdbc.driver.OracleDriver()); 
+		    String dbURL = "jdbc:oracle:thin:@(DESCRIPTION =(ADDRESS = (PROTOCOL = TCP)(HOST = 10.36.20.51)(PORT = 1521))(CONNECT_DATA = (SERVER = DEDICATED)(SERVICE_NAME = njrbtst)))";
+		    String strUserID = "pbatch";
+		    String strPassword = "batchp"; 
+		    Connection c=DriverManager.getConnection(dbURL,strUserID,strPassword);
+		    
+		    String Statement = "select viol_tx_status from  t_viol_tx where extern_file_id = "+xferid+" and rownum =1"; 
+		    
+		    ResultSet rs = c.createStatement().executeQuery(Statement);
+		    String vts = null;
+		   
+		    while(rs.next()){
+		    	vts =rs.getString("VIOL_TX_STATUS");  
+		    }
+		    System.out.println(vts);
+		    if(vts==null)
+		    {	
+		    	vts = "NULL";		  
+
+		    }
+		  	    
+			c.close();
+			return vts;
+		}
+	
+	
+	public static String verifyPlate(String Plate_state,String plate_number) throws SQLException
+	{
+		
+		
+		    System.out.println("Veriying state : "+Plate_state);
+		    System.out.println("Veriying number : "+plate_number);
+		    
+		    		    	
+		    
+			DriverManager.registerDriver( new oracle.jdbc.driver.OracleDriver()); 
+		    String dbURL = "jdbc:oracle:thin:@(DESCRIPTION =(ADDRESS = (PROTOCOL = TCP)(HOST = 10.36.20.51)(PORT = 1521))(CONNECT_DATA = (SERVER = DEDICATED)(SERVICE_NAME = njrbtst)))";
+		    String strUserID = "pbatch";
+		    String strPassword = "batchp"; 
+		    Connection c=DriverManager.getConnection(dbURL,strUserID,strPassword);
+		    
+		    String Statement1 = "select count(plate_number) from v_vehicle where plate_state ='"+Plate_state+"' and plate_number ='"+plate_number+"'"; 
+		    String Statement2 = "select count(plate_number) from t_oa_plates where plate_state ='"+Plate_state+"' and plate_number ='"+plate_number+"'"; 
+		    
+		    ResultSet rs1 = c.createStatement().executeQuery(Statement1);
+		    ResultSet rs2= c.createStatement().executeQuery(Statement2);
+		    String hplatecnt = null;
+		    String aplatecnt = null;
+		   
+		    while(rs1.next()){
+		    	hplatecnt =rs1.getString("count(plate_number)");  
+		    }
+		    
+		    while(rs2.next()){
+		    	aplatecnt =rs2.getString("count(plate_number)");  
+		    }
+		    System.out.println(hplatecnt+aplatecnt);
+		    
+		  	int cnt = Integer.parseInt(hplatecnt)+Integer.parseInt(aplatecnt);   
+			c.close();
+			return cnt+"";
+		  
+		}
+	
+	
+	
+	
+	
+	public static String insertxferid(String filename) throws SQLException
+	{
+		
+		
+		
+		DriverManager.registerDriver( new oracle.jdbc.driver.OracleDriver()); 
+			   String dbURL = "jdbc:oracle:thin:@(DESCRIPTION =(ADDRESS = (PROTOCOL = TCP)(HOST = 10.36.20.51)(PORT = 1521))(CONNECT_DATA = (SERVER = DEDICATED)(SERVICE_NAME = njrbtst)))";
+		    String strUserID = "pbatch";
+		    String strPassword = "batchp"; 
+		    Connection c=DriverManager.getConnection(dbURL,strUserID,strPassword);
+		    
+		    String Statement = "insert into t_xfer_control (XFER_CONTROL_ID, XFER_FILE_ID, XFER_FILE_NAME, DATE_CREATED, TIME_CREATED, FILE_SIZE, FILE_CHECKSUM, NUM_RECS, HASH_TOTAL, XFER_PATH, XFER_XMIT_STATUS, XFER_RETRY, UPDATE_TS, FILE_TYPE) values ((select Max( XFER_CONTROL_ID) + 1 from t_xfer_control where length( XFER_CONTROL_ID) = 8),711, '"+filename+"', to_date('25-11-2015', 'dd-mm-yyyy'), '08:00:13', 3857466, 0, 9, 0, '/app/vector/data_files/njtp_qatp', 'S', '0', '19-AUG-13 08.00.13.000 AM -04:00', 'tr')";
+		    c.createStatement().executeQuery(Statement);
+	    	c.createStatement().executeQuery("Commit");
+	    	
+	    	return "";
+	   }
+	
+	public static String threetofour(String xferid) throws SQLException
+	{
+		
+		
+		   System.out.println("Exfer id is  "+xferid);
+		   DriverManager.registerDriver( new oracle.jdbc.driver.OracleDriver()); 
+			String dbURL = "jdbc:oracle:thin:@(DESCRIPTION =(ADDRESS = (PROTOCOL = TCP)(HOST = 10.36.20.51)(PORT = 1521))(CONNECT_DATA = (SERVER = DEDICATED)(SERVICE_NAME = njrbtst)))";
+		    String strUserID = "pbatch";
+		    String strPassword = "batchp"; 
+		    Connection c=DriverManager.getConnection(dbURL,strUserID,strPassword);
+		    
+		    
+		    
+		       
+		   		    
+		    String Statement = "update t_viol_tx set viol_tx_status = 154 where extern_file_id = '"+xferid+"'";
+		    c.createStatement().executeQuery(Statement);
+	    	c.createStatement().executeQuery("Commit");
+	    	
+	    	Statement = "update t_viol_tx set viol_tx_status = 4,event_type=3 where extern_file_id = '"+xferid+"'";
+		    c.createStatement().executeQuery(Statement);
+	    	c.createStatement().executeQuery("Commit");
+	    	
+		   
+	    	
+	    	return "";
+	   }
+	
+	
+	
+	public static String fileTransfer(String ip,String username,String password,String path,String filename) throws SftpException, FileNotFoundException {
+
+   	 JSch jsch = new JSch();
+   	    Session session = null;
+   	    try {
+               session = jsch.getSession(username,ip, 22);
+
+   	        session.setConfig("StrictHostKeyChecking", "no");
+   	        session.setPassword(password);
+   	        session.connect();
+   	        System.out.println("Connected to session successfully");
+   	        Channel channel = session.openChannel("sftp");
+   	        channel.connect();
+   	        System.out.println("Connected to Channel successfully");
+   	        ChannelSftp sftpChannel = (ChannelSftp) channel;
+
+   	        // this will read file with the name test.txt and write to remote directory
+   	        sftpChannel.cd(path);
+   	        File f = new File("E:/TSG/Workspace/App/WebApp-01/Files/"+filename);
+   	        System.out.println("Filename is : "+f.getName());
+   	        sftpChannel.put(new FileInputStream(f), f.getName()); // here you can also change the target file name by replacing f.getName() with your choice of name
+
+   	        sftpChannel.exit();
+   	        session.disconnect();
+   	    } catch (JSchException e) {
+   	        e.printStackTrace();  
+   	    }
+   	return "";
+   }
+	
+	public static String runCommand(String command) throws InterruptedException, JSchException, IOException {
+
+	   	  JSch jsch = new JSch();
+			Session session = null;
+			
+		  
+		    	
+		    	session = jsch.getSession("50004561", "10.36.20.47", 22);
+
+		        session.setConfig("StrictHostKeyChecking", "no");
+		        session.setPassword("Rocky@123");
+		        session.connect();
+		        System.out.println("Connected to session successfully");
+		    	
+		        Channel channel=session.openChannel("shell");
+	            OutputStream ops = channel.getOutputStream();
+	            PrintStream ps = new PrintStream(ops, true);
+	            
+	            channel.connect();
+	            ps.println("sudo su - pbatch"); 
+	            Thread.sleep(1000);
+	            ps.println("q");
+	            Thread.sleep(1000);
+	           // ps.println("cd /app/vector/shell");
+	            ps.println(command);
+	            ps.close();
+	            
+	            InputStream in=channel.getInputStream();
+	             byte[] bt=new byte[1024];
+
+
+	             while(true)
+	             {
+
+	             while(in.available()>0)
+	             {
+	             int i=in.read(bt, 0, 1024);
+	             if(i<0)
+	              break;
+	                String str=new String(bt, 0, i);
+	              //displays the output of the command executed.
+	                System.out.print(str);
+
+
+	             }
+	             if(channel.isClosed())
+	             {
+
+	                 break;
+	            }
+	             Thread.sleep(1000);
+	             channel.disconnect();
+	             session.disconnect(); 
+	             
+	             }
+
+	             return "";   
+		    } 
+		    
+	
+	public static String setplateQuery(String xfer, String[] platestate,String[] platenumber) throws InterruptedException, JSchException, IOException, NumberFormatException, EncryptedDocumentException, org.apache.poi.openxml4j.exceptions.InvalidFormatException, SQLException {
+
+	   	  
+		
+		int totalviolations = Integer.parseInt(common.ExcelRead("PlateDetails", "E:\\TSG\\Workspace\\App\\WebApp-01\\NJTPViolMacro.xlsm", 1, 7));
+		
+		
+		DriverManager.registerDriver( new oracle.jdbc.driver.OracleDriver()); 
+		String dbURL = "jdbc:oracle:thin:@(DESCRIPTION =(ADDRESS = (PROTOCOL = TCP)(HOST = 10.36.20.51)(PORT = 1521))(CONNECT_DATA = (SERVER = DEDICATED)(SERVICE_NAME = njrbtst)))";
+	    String strUserID = "pbatch";
+	    String strPassword = "batchp"; 
+	    Connection c=DriverManager.getConnection(dbURL,strUserID,strPassword);
+	    
+	    String Statement1 = "select LANE_TX_ID from t_viol_tx where extern_file_id ='"+xfer+"'"; 
+	   
+	    
+	    ResultSet rs1 = c.createStatement().executeQuery(Statement1);
+	    String lanetxid[] = new String[totalviolations];
+	    int i=0;
+	    
+	    while(rs1.next()){
+	    	lanetxid[i] =rs1.getString("LANE_TX_ID");  
+	    	i++;
+	    }
+	    
+	    int k=0;
+	    int l=0;
+	    int number = totalviolations/platenumber.length;
+	    System.out.println(number);
+	    for(int j=0;j<totalviolations;j++)
+	    {   
+	    	if(k==number)
+	    	{
+	    		k=0;
+	    		l++;
+	    	}
+	    	k++;
+	    	common.ExcelWrite("PlateDetails", "E:\\TSG\\Workspace\\App\\WebApp-01\\NJTPViolMacro.xlsm", j+1, 0,lanetxid[j]);	    	
+	    	common.ExcelWrite("PlateDetails", "E:\\TSG\\Workspace\\App\\WebApp-01\\NJTPViolMacro.xlsm", j+1, 1,platestate[l]);
+	    	common.ExcelWrite("PlateDetails", "E:\\TSG\\Workspace\\App\\WebApp-01\\NJTPViolMacro.xlsm", j+1, 2,platenumber[l]);
+	    	
+	    	
+	    	String Statement2 = "update t_viol_tx set viol_tx_status =5,plate_state = '"+platestate[l]+"'  , plate_number = '"+platenumber[l]+"' where lane_tx_id ='"+lanetxid[j]+"'";
+	    	c.createStatement().executeQuery(Statement2);
+	    	c.createStatement().executeQuery("Commit");
+	    	
+	    }    
+		
+	
+	               c.close();
+		    	   return "";   
+		    } 
+		    
+	
+	
+public static String createDMVLine(int i,String platestate,String platenumber,String lanetxid,String lastname,String middlename,String firstname,String Address1,String Address2,String City,String State,String Zip) throws SQLException  {
+
+			DriverManager.registerDriver( new oracle.jdbc.driver.OracleDriver()); 
+			String dbURL = "jdbc:oracle:thin:@(DESCRIPTION =(ADDRESS = (PROTOCOL = TCP)(HOST = 10.36.20.51)(PORT = 1521))(CONNECT_DATA = (SERVER = DEDICATED)(SERVICE_NAME = njrbtst)))";
+			String strUserID = "pbatch";
+			String strPassword = "batchp"; 
+			Connection c=DriverManager.getConnection(dbURL,strUserID,strPassword);
+			String Statement = "select REG from t_dmv_name_policy where State ='"+State+"'"; 
+			ResultSet rs = c.createStatement().executeQuery(Statement);
+			
+            String REG=null;
+			
+			while(rs.next()){
+		    	 REG=rs.getString("REG");  
+		    	
+		    }
+			
+			String CONST1 = "2017052679838432000163201714120161412017141201729000 14822   00VAN     99945   201703310000000000000000021";
+		    String CONST2 = "00000000          00000000          000000000000   D";	    
+		    String zip2="";
+		    String VIN = "FER0012";
+		    String License = "NJ1234";
+		    String dmvtext =null;
+		    String name =null;
+			
+			if(REG.equals("LFM"))
+			{
+				name = lastname + " " + firstname + " " + middlename;
+					
+			}
+			else
+			{   name = firstname + " " + middlename+ " " +lastname;
+				
+			}
+		    
+			dmvtext = common.setLength(platestate,2)+common.setLength(platenumber,10)+"00"+common.setLength(platestate,2)+common.setLength(platenumber,8)+"00"+common.setLength(lanetxid,12)+"NJT"+CONST1+common.setLength(lastname,20)+common.setLength(name,35)+common.setLength(Address1,35)+common.setLength(Address2,35)+common.setLength(City,30)+common.setLength(State,2)+common.setLength(Zip,5)+common.setLength(zip2,4)+common.setLength(VIN,30)+common.setLength(License,30)+CONST2;
+		    
+		    
+		    
+		    System.out.println(dmvtext);
+		    System.out.println("Round "+i+" Completed");
+	    	
+	    
+		
+		
+		
+		return dmvtext.toUpperCase();   
+} 
+	
+
+public static  String createDMVFile(String[] dmvfile) throws IOException, InterruptedException{
+
+	
+	 DateTimeFormatter formatter = DateTimeFormatter.ofPattern("YYYYMMdd");
+	 String todaydate = LocalDate.now().format(formatter);
+	 String filename ="NJ_dmv_rejects_"+todaydate+".dat";
+	 String filepath ="E:\\TSG\\Workspace\\App\\WebApp-01\\Files\\"+filename;
+	 
+	 File f = new File(filepath);
+	 if(f.exists() && !f.isDirectory()) { 
+		    f.delete();
+		}
+	
+	 
+	 BufferedWriter bw = new BufferedWriter(new FileWriter(filepath, true));
+	 for(int i=0;i<dmvfile.length;i++)
+	 {	 
+	 bw.write(dmvfile[i]+"\n");
+	 //bw.newLine();
+	 }
+	 System.out.println("File created");
+	 bw.flush();
+	 bw.close();
+	
+	 
+	  
+	    
+
+return filename;   
+} 
+	
+
+
+
+	
+	
+public static String licaRetry(String xfer) throws InterruptedException, JSchException, IOException, NumberFormatException, EncryptedDocumentException, org.apache.poi.openxml4j.exceptions.InvalidFormatException, SQLException {
+
+	   	  	
+		
+		DriverManager.registerDriver( new oracle.jdbc.driver.OracleDriver()); 
+		String dbURL = "jdbc:oracle:thin:@(DESCRIPTION =(ADDRESS = (PROTOCOL = TCP)(HOST = 10.36.20.51)(PORT = 1521))(CONNECT_DATA = (SERVER = DEDICATED)(SERVICE_NAME = njrbtst)))";
+	    String strUserID = "pbatch";
+	    String strPassword = "batchp"; 
+	    Connection c=DriverManager.getConnection(dbURL,strUserID,strPassword);
+	    
+	    String Statement1 = "update t_viol_lica_queue set processed_Date = trunc(sysdate)-1 where LANE_TX_ID in (select LANE_TX_ID from t_viol_tx where extern_file_id ='"+xfer+"')"; 
+	    String Statement2 = "update t_Viol_Tx_Event set event_timestamp = event_timestamp-4 where LANE_TX_ID in (select LANE_TX_ID from t_viol_tx where extern_file_id ='"+xfer+"')"; 
+	   
+	    c.createStatement().executeQuery(Statement1);
+	    c.createStatement().executeQuery("Commit");	  
+	    c.createStatement().executeQuery(Statement2);
+	    c.createStatement().executeQuery("Commit");	 
+		
+	
+	    c.close();
+		return "";   
+    } 
+
+
+public static String imageIns(int length,String lanetxid) throws InterruptedException, JSchException, IOException, NumberFormatException, EncryptedDocumentException, org.apache.poi.openxml4j.exceptions.InvalidFormatException, SQLException {
+
+	  	
+	
+	DriverManager.registerDriver( new oracle.jdbc.driver.OracleDriver()); 
+	String dbURL = "jdbc:oracle:thin:@(DESCRIPTION =(ADDRESS = (PROTOCOL = TCP)(HOST = 10.36.20.51)(PORT = 1521))(CONNECT_DATA = (SERVER = DEDICATED)(SERVICE_NAME = njrbtst)))";
+    String strUserID = "pbatch";
+    String strPassword = "batchp"; 
+    Connection c=DriverManager.getConnection(dbURL,strUserID,strPassword);
+    
+    String Outfilename ="01318E_18eE";
+    
+    for(int i=0;i<length;i++)
+    {	
+    
+    String Statement1 = "insert into t_viol_image_tx (lane_tx_id,in_file_name,out_file_name,lane_image_cnt,proc_image_cnt,receive_date,process_date,lane_id ,tx_seq_number ,process_desc,ocr_conf ,ocr_plate_state,ocr_plate_number,ocr_plate_type ,ocr_plate_type_conf,ocr_status,tx_date,zip_file_name,tx_timestamp,update_ts,axle_count,plaza_id,img_file_index,IMP_TYPE)"; 
+    String Statement2 = "update t_Viol_Tx_Event set event_timestamp = event_timestamp-4 where LANE_TX_ID in (select LANE_TX_ID from t_viol_tx where extern_file_id ='"+xfer+"')"; 
+   
+    c.createStatement().executeQuery(Statement1);
+    c.createStatement().executeQuery("Commit");	  
+    c.createStatement().executeQuery(Statement2);
+    c.createStatement().executeQuery("Commit");	 
+    }
+	
+
+    c.close();
+	return "";   
+} 
+		       	
+ }
+
+

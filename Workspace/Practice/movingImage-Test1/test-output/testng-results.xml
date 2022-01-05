@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results ignored="0" total="4" passed="4" failed="0" skipped="0">
+  <reporter-output>
+  </reporter-output>
+  <suite started-at="2021-10-16T17:07:06 IST" name="Default suite" finished-at="2021-10-16T17:07:09 IST" duration-ms="3036">
+    <groups>
+    </groups>
+    <test started-at="2021-10-16T17:07:06 IST" name="Default test" finished-at="2021-10-16T17:07:09 IST" duration-ms="3036">
+      <class name="Tests.testCases">
+        <test-method signature="getEmailids()[pri:0, instance:Tests.testCases@a3d8174]" started-at="2021-10-16T17:07:06 IST" name="getEmailids" finished-at="2021-10-16T17:07:09 IST" duration-ms="2109" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getEmailids -->
+        <test-method signature="getPostsIds()[pri:0, instance:Tests.testCases@a3d8174]" started-at="2021-10-16T17:07:09 IST" name="getPostsIds" finished-at="2021-10-16T17:07:09 IST" duration-ms="91" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getPostsIds -->
+        <test-method signature="getUserid()[pri:0, instance:Tests.testCases@a3d8174]" started-at="2021-10-16T17:07:09 IST" name="getUserid" finished-at="2021-10-16T17:07:09 IST" duration-ms="79" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- getUserid -->
+        <test-method signature="validAllUseremails()[pri:0, instance:Tests.testCases@a3d8174]" started-at="2021-10-16T17:07:09 IST" name="validAllUseremails" finished-at="2021-10-16T17:07:09 IST" duration-ms="725" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- validAllUseremails -->
+      </class> <!-- Tests.testCases -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>

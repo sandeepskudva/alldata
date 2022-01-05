@@ -1,0 +1,28 @@
+package NoticeCreation;
+
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
+
+public class dateCheck {
+
+	public static void main(String[] args) throws ParseException {
+		// TODO Auto-generated method stub
+		
+		
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMddHHmmss");
+		String dateInString = "20180612000000";
+		Date date = sdf.parse(dateInString);
+		System.out.println(sdf.format(date));
+		
+		
+         int minsToAdd = 30; //or from input
+//		Calendar calendar = Calendar.getInstance();
+//		calendar.add(Calendar.HOUR, hoursToAdd);
+//		System.out.println(new SimpleDateFormat("yyyyMMddHHmmss").format(calendar.getTime()));
+
+	}
+
+}

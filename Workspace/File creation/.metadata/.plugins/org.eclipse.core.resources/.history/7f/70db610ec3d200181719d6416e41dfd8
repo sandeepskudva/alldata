@@ -1,0 +1,39 @@
+package Safeform;
+import java.lang.Math;
+
+public class clockAngle {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		String Currenttime = "9:00";
+		
+		
+		String[] time = Currenttime.split(":");
+		String hour = time[0];
+		String Mins = time[1];
+		System.out.println("Hour is "+hour);
+		System.out.println("Mins is "+Mins);
+		int minanglefromtweleve = Integer.parseInt(Mins) *6 ;
+		int houranglefromtweleve =0;
+		if(Mins.equals("00"))
+		{
+		houranglefromtweleve = Integer.parseInt(hour) *30 ;	
+		}
+		else
+		{	
+	     houranglefromtweleve = Integer.parseInt(hour) *30 + 30/Integer.parseInt(Mins);
+		}
+		
+		int angle = Math.abs(360-houranglefromtweleve-minanglefromtweleve);
+		
+		
+		System.out.println(angle+" Degrees");
+		
+		
+		
+		
+
+	}
+
+}

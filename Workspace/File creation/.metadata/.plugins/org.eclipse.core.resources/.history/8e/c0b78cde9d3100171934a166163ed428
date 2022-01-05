@@ -1,0 +1,38 @@
+package Creationpages;
+
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.PageFactory;
+import com.vector.func.Genric;
+import com.vector.func.SuperBase;
+
+
+
+public class ConfirmationPage extends SuperBase {
+	
+	static Genric  g = new Genric();
+	
+	
+	public ConfirmationPage(WebDriver driver)
+	{
+		
+		this.driver = driver;
+		PageFactory.initElements(driver, this);
+		
+	}
+		
+	
+	
+
+	
+	public void clickCompleteOrder(WebDriver driver) throws InterruptedException
+	{
+		WebElement completeOrder =driver.findElement(By.xpath("//button[@name='btnComplete']"));
+		completeOrder.click();	
+		    
+	}
+	
+
+}

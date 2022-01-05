@@ -1,0 +1,13 @@
+package Filetransfer;
+import java.util.regex.*;
+
+public class countofPattern {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		String sentence = "He can do it. He lit 1 candle, but can he light 5 candles";
+
+	}
+
+}

@@ -1,0 +1,22 @@
+package Research;
+
+import java.lang.reflect.Method;
+import java.util.Set;
+
+import org.reflections.Reflections;
+
+import Testcases.accountCreationMaintenance.testcaseselector;
+
+
+
+public class classcheck {
+	
+	 public static void main(String[] args) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException {
+	    	
+		 Class<?> c = Class.forName("Research.reporttest");
+		 Method  method = c.getDeclaredMethod ("verifytitle")
+		 method.invoke (objectToInvokeOn, params)
+		
+	    }
+
+}

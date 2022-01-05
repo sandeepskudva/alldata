@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Move element &apos;Schedularservlet.java&apos; to &apos;Checkone/src&apos;&#x0D;&#x0A;- Original project: &apos;ProjectSchedular&apos;&#x0D;&#x0A;- Destination element: &apos;Checkone/src&apos;&#x0D;&#x0A;- Original element: &apos;Schedularservlet.java&apos;&#x0D;&#x0A;- Update references to refactored element" description="Move file" destination="=Checkone/src" element1="apache-tomcat-9.0.0.M26/webapps/Schedular/WEB-INF/Classes/Schedularservlet.java" files="1" flags="589830" folders="0" id="org.eclipse.jdt.ui.move" policy="org.eclipse.jdt.ui.moveResources" qualified="false" references="true" stamp="1503317126297" units="0" version="1.0"/>
+</session>

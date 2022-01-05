@@ -1,0 +1,38 @@
+package Filetransfer;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
+import org.apache.commons.net.ftp.FTP;
+import org.apache.commons.net.ftp.FTPClient;
+import org.apache.commons.net.telnet.TelnetClient;
+
+import com.jcraft.jsch.Channel;
+import com.jcraft.jsch.ChannelExec;
+import com.jcraft.jsch.JSch;
+import com.jcraft.jsch.JSchException;
+import com.jcraft.jsch.Session;
+
+
+public class remoteconnect {
+
+	public static void main(String[] args) throws IOException, InterruptedException, JSchException {
+
+		
+		JSch jsch = new JSch();
+		Session session = null;
+		
+         
+        session = jsch.getSession("30196589", "10.36.20.41", 22);
+
+        session.setConfig("StrictHostKeyChecking", "no");
+        session.setPassword("Siri@2020");
+        session.connect();
+        System.out.println("Connected to session successfully");
+	 }
+	
+	
+	
+}
+

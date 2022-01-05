@@ -1,0 +1,10 @@
+20170615_124212 : Starting testcase number : 025
+20170615_124228 : Login module Sucessfull
+20170615_124254 : Login Executed Sucessfully
+20170615_124258 : Login Sucessfull account number validated 2000189073589
+20170615_124258 : Home Page navigation Passed
+20170615_124347 : Transactions page navigation Passed
+20170615_124404 : Counts not matching
+20170615_124404 : Search using tx_date Failed
+20170615_124407 : Ending testcase number : 025
+20170615_124407 : ******************************************

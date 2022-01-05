@@ -1,0 +1,115 @@
+package webAccountCreation;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.TimeUnit;
+
+import org.apache.poi.EncryptedDocumentException;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.testng.TestNG;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
+import org.testng.xml.XmlClass;
+import org.testng.xml.XmlSuite;
+import org.testng.xml.XmlTest;
+
+import com.vector.func.Genric;
+
+public class xmlcreator {
+	 WebDriver driver ;
+	@BeforeTest
+	public void be() throws EncryptedDocumentException, InvalidFormatException, IOException
+	{
+		String detail = "accountDetail";
+		String testcasestatus= "TestSuite";
+		System.setProperty("webdriver.chrome.driver", "E:/Selenium/chromedriver.exe");
+		driver = new ChromeDriver();
+		  String Sheetpath =  "E://TSG//Workspace//File creation//Web//WebCreation.xlsm";
+		  Genric g = new Genric();
+		   
+	   
+		String URL = g.ExcelRead(detail, Sheetpath, 1, 1);
+	    System.out.println(URL);
+	    driver.get(URL);
+	    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+	    driver.manage().window().maximize();         
+	}
+	@AfterTest
+	public void af()
+	{
+		driver.close();
+	}
+
+	public static void main(String[] args) throws EncryptedDocumentException, InvalidFormatException, IOException {
+		
+		String Sheetpath =  "E://TSG//Workspace//File creation//Web//WebCreation.xlsm";
+		String detail = "accountDetail";
+		String testcasestatus= "TestSuite";
+		
+      //  System.setProperty("webdriver.chrome.driver", "E:/Selenium/chromedriver.exe");
+		
+	  //  WebDriver driver = new ChromeDriver();
+	    
+		
+		XmlSuite suite = new XmlSuite();
+		suite.setName("TestSuite");
+		XmlTest test = new XmlTest(suite);
+		test.setName("TestSuite");
+		List<XmlClass> classes = new ArrayList<XmlClass>();
+		classes.add(new XmlClass("Testcases.common"));
+		
+		int i=1;
+	    int Rownum=1;
+	    
+	    Genric g = new Genric();
+	   
+	    String runstatus  =g.ExcelRead(testcasestatus, Sheetpath, i, 1);
+	    
+	    while (!runstatus.equals("END"))
+	    {
+	    	runstatus = g.ExcelRead(testcasestatus, Sheetpath, i, 1); 
+	    	if(runstatus.equals("Y"))
+	    	{   		
+	    		final long startTime = System.currentTimeMillis();
+	    	     
+	    	     System.out.println(runstatus);	    
+	    	     String testcasenumber = g.ExcelRead(testcasestatus, Sheetpath, i, 0);
+	    	     System.out.println("adding Testcase to suite"+testcasenumber);
+	    	     String classname = "Testcases.testcase"+testcasenumber;
+	    	     classes.add(new XmlClass(classname));		
+	    		 test.setXmlClasses(classes) ;
+	    			
+	    	     
+	 			          
+	    	
+	    	//ReportLibrary.addStep(ReportLibrary.Test_Step_Number, "Adding account details in first page", LogStatus.INFO, true);
+	    	
+	    	
+	        
+	    	final long endTime = System.currentTimeMillis();		
+	    	System.out.println("Time taken to execute test case "+testcasenumber+" is "+(endTime-startTime)/1000 + " Seconds");	
+	    	System.out.println(Rownum+"***************************************************************************************");
+	    	
+	    	}
+	    	Rownum++; 
+	    	i++;	
+	  
+	    }
+		
+		
+		 
+		
+		
+		List<XmlSuite> suites = new ArrayList<XmlSuite>();
+		suites.add(suite);
+		TestNG tng = new TestNG();
+		tng.setXmlSuites(suites);
+		tng.run();
+
+
+	}
+
+}

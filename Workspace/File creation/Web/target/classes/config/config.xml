@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<extentreports>
+    <configuration>
+        <encoding>UTF-8</encoding>
+		
+        <documentTitle>Web Test Automation Report</documentTitle> <!-- NJ REBID Test Automation Report -->
+		
+		 <reportName>
+		 Web Automation
+		 </reportName>
+        
+		<reportHeadline>
+		 </reportHeadline>
+		 
+		
+        
+		<theme>dark</theme>
+    </configuration>
+</extentreports>

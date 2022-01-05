@@ -1,0 +1,27 @@
+package Research;
+
+import java.lang.reflect.Method;
+import java.util.Set;
+
+import org.reflections.Reflections;
+
+import Testcases.accountCreationMaintenance.testcaseselector;
+
+
+
+public class classcheck {
+	
+	 public static void main(String[] args) throws ClassNotFoundException, NoSuchMethodException, SecurityException, InstantiationException, IllegalAccessException {
+	    	
+		   Class clazz = Class.forName("Research.smoketest.java");
+		   testcaseselector ts = (testcaseselector) clazz.newInstance();
+//      testcase001 one = new testcase001();
+//     
+//		 
+//		 Method method = Class.forName("testcase001").getMethod("case00", new Class[] {int.class});
+//		 method.invoke(one, report,logger,Rownum);
+		 
+		
+	    }
+
+}

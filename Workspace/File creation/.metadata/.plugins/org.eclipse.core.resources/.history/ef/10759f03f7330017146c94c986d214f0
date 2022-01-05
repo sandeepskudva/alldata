@@ -1,0 +1,81 @@
+package Creationpages;
+
+
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.PageFactory;
+
+import com.relevantcodes.extentreports.ExtentReports;
+import com.relevantcodes.extentreports.ExtentTest;
+import com.vector.func.Genric;
+import com.vector.func.SuperBase;
+
+public class planPage extends SuperBase {
+static Genric  g = new Genric();
+	
+	
+	public planPage(WebDriver driver)
+	{
+		
+		this.driver = driver;	
+		PageFactory.initElements(driver, this);
+		
+	}
+		
+	
+	
+	
+	public void fillPlanSection(ExtentReports report,ExtentTest logger,int Rownum) 
+	{
+		
+		try {  
+				
+		    String plan = g.ExcelRead(detail, Sheetpath, Rownum, 24);	
+		    
+		    
+		  
+		    addplan(driver,plan);
+		   
+		 
+		    r.addstep(report, logger, "Pass", testcasenumber, "tags and Payments Page passed ", false);
+		    System.out.println("Completed filling tags and Payments Page");  	
+		    
+			
+		}
+		catch(Exception allexception)
+		{
+			r.addstep(driver, report, logger, "Fail", testcasenumber, "tags and Payments Page Failed ", true);
+			System.out.println("Error occured in filling Plan Section "+allexception.getMessage());			
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	public void addplan(WebDriver driver,String plan) throws InterruptedException
+	{
+		String buildplan = "//div[td[text()='"+plan+"']]/@type='checkbox'";
+	    
+	    if(plan.equals("STANDARD"))
+	    {
+	    	System.out.println("Plan is STANDARD");
+	    }
+	    else
+	    {	
+	    WebElement selectplan = driver.findElement(By.xpath(buildplan));
+	    selectplan.click();
+	    
+	    }	
+	
+	}
+	
+	
+
+}

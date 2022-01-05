@@ -1,0 +1,694 @@
+package accountCreation;
+import java.awt.AWTException;
+import java.awt.Robot;
+import java.awt.event.KeyEvent;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.util.concurrent.TimeUnit;
+
+import javax.swing.JOptionPane;
+
+import org.apache.poi.EncryptedDocumentException;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.Select;
+
+
+
+
+public class AccountCreation {
+	
+	
+	static void alwayswait(int timeinseconds) throws InterruptedException
+	{
+		Thread.sleep(timeinseconds * 1000);
+		System.out.println(timeinseconds+" seconds Wait is over");
+	}
+
+	static void controlplus(WebDriver driver,String character)
+	{
+		Actions actionObj = new Actions(driver);
+	    actionObj.keyDown(Keys.CONTROL)
+	             .sendKeys(Keys.chord(character))
+	             .keyUp(Keys.CONTROL)
+	             .perform();
+	}
+	
+	static void dropdown(WebDriver driver, WebElement element, String value)
+	{
+		Select select = new Select(element);
+	    select.deselectAll();
+	    select.selectByVisibleText(value);
+	}
+	
+	static void generaldetails(WebDriver driver, String pinnumber,int accounttype, String companyname ,String sheetpath, int Rownum) throws InterruptedException, EncryptedDocumentException, InvalidFormatException, IOException
+	{
+		
+		WebElement addbtn = null;
+		WebElement pin=null;
+	    WebElement challengeAnswer=null;
+	    
+	    WebElement accntType=null; 
+	    WebElement accntName=null;
+	    WebElement dbaName=null;
+	    WebElement commerical = driver.findElement(By.xpath("//li[a[contains(text(),'Commercial')]]"));
+	    WebElement org=null;
+	    WebElement statementFreq =null;
+	    WebElement ok = null;
+	    String orgname;
+	    String freq;
+	    if(accounttype==1)
+	    {
+	    	orgname = ExcelRead("Private", sheetpath, Rownum, 14);
+		    freq = ExcelRead("Private", sheetpath, Rownum, 15);
+	    }
+	    else if (accounttype==2)
+	    {
+	    	System.out.println("Business");
+	    	orgname = ExcelRead("Business", sheetpath, Rownum, 14);
+		    freq = ExcelRead("Business", sheetpath, Rownum, 15);
+	    }
+	    else
+	    {
+	    	orgname = ExcelRead("Commercial", sheetpath, Rownum, 14);
+		    freq = ExcelRead("Commercial", sheetpath, Rownum, 15);
+	    }
+	    
+	    
+	    
+	    
+		switch(accounttype)
+		{
+		  
+		case 1 :  addbtn = driver.findElement(By.xpath("//button[@id='s_1_1_52_0_Ctrl']")); 
+		          addbtn.click();
+		          org = driver.findElement(By.xpath("//input[@name='s_1_1_30_0']"));
+		          alwayswait(2);
+		          org.clear();
+		          org.sendKeys(orgname);
+		          pin = driver.findElement(By.xpath("//input[@name='s_1_1_27_0']"));
+		          challengeAnswer = driver.findElement(By.xpath("//input[@name='s_1_1_43_0']"));
+		          accntType = driver.findElement(By.xpath("//input[@name='s_1_1_33_0']"));
+		          statementFreq = driver.findElement(By.name("s_1_1_22_0"));
+		          statementFreq.clear();
+		          statementFreq.sendKeys(freq);
+		          pin.click();
+		          ok = driver.findElement(By.id("s_4_1_63_0_Ctrl"));
+		          ok.click();
+		          break;
+		          
+		case 2 :  
+	    		  commerical.click();
+	    		  addbtn = driver.findElement(By.xpath("//button[@id='s_2_1_50_0_Ctrl']")); 
+			      addbtn.click();
+			      org = driver.findElement(By.xpath("//input[@name='s_2_1_28_0']"));
+		          alwayswait(2);
+		          org.clear();
+		          org.sendKeys("NEW JERSEY E-ZPASS");
+			      pin = driver.findElement(By.xpath("//input[@name='s_2_1_24_0']"));
+				  challengeAnswer = driver.findElement(By.xpath("//input[@name='s_2_1_41_0']"));
+				  accntType = driver.findElement(By.xpath("//input[@name='s_2_1_31_0']"));
+				  accntName = driver.findElement(By.xpath("//input[@name='s_2_1_30_0']"));
+				  
+				  dbaName = driver.findElement(By.xpath("//input[@name='s_2_1_9_0']"));
+				  dbaName.sendKeys(companyname);
+				  accntName.sendKeys(companyname);
+				  statementFreq = driver.findElement(By.name("s_2_1_19_0"));
+				  statementFreq.clear();
+		          statementFreq.sendKeys("NONE");
+		          pin.click();
+		          ok = driver.findElement(By.id("s_4_1_61_0_Ctrl")); 
+		          ok.click();
+				  break;
+				 
+		case 3 :  commerical.click();
+		  		  addbtn = driver.findElement(By.xpath("//button[@id='s_2_1_50_0_Ctrl']")); 
+		  		  addbtn.click();
+		  		  org = driver.findElement(By.xpath("//input[@name='s_2_1_28_0']"));
+		  		  alwayswait(2);
+		  		  org.clear();
+		  		  org.sendKeys("NEW JERSEY E-ZPASS");
+		  		  pin = driver.findElement(By.xpath("//input[@name='s_2_1_24_0']"));
+		  		  challengeAnswer = driver.findElement(By.xpath("//input[@name='s_2_1_41_0']"));
+		  		  accntType = driver.findElement(By.xpath("//input[@name='s_2_1_31_0']"));
+		  		  accntName = driver.findElement(By.xpath("//input[@name='s_2_1_30_0']"));
+		  
+		  		  dbaName = driver.findElement(By.xpath("//input[@name='s_2_1_9_0']"));
+		  		  dbaName.sendKeys(companyname);
+		  		  accntName.sendKeys(companyname);
+		  		  statementFreq = driver.findElement(By.name("s_2_1_19_0"));
+		  		  statementFreq.clear();
+		  		  statementFreq.sendKeys("NONE");
+		  		  ok= driver.findElement(By.id("s_4_1_61_0_Ctrl")); 
+		  		  ok.click();
+		  		  break;
+				  
+       default :  break;			  
+				  
+		
+		}
+		
+		alwayswait(3);
+        pin.sendKeys(pinnumber);   
+	    challengeAnswer.sendKeys(pinnumber);
+	    
+	    
+		
+	}
+	
+	
+	public static String ExcelRead(String Sheetname,String Path,int row1, int col1) throws EncryptedDocumentException, InvalidFormatException, IOException{
+
+			
+		FileInputStream fis=new FileInputStream(Path);
+		Workbook wb=WorkbookFactory.create(fis);
+		Sheet sh=wb.getSheet(Sheetname);
+		Row row=sh.getRow(row1);
+		Cell cell=row.getCell(col1);
+		String cellvalue=cell.getStringCellValue();	
+		return cellvalue;
+
+	}
+
+
+
+	public static void ExcelWrite(String Sheetname,String Path,int row1, int col1, String value) throws EncryptedDocumentException, InvalidFormatException, IOException{
+
+		
+		FileInputStream fis=new FileInputStream(Path);
+		Workbook wb=WorkbookFactory.create(fis);
+		Sheet sh=wb.getSheet(Sheetname);
+		Row row=sh.getRow(row1);
+		Cell cell=row.createCell(col1);
+		cell.setCellType(Cell.CELL_TYPE_STRING);
+		cell.setCellValue(value);
+		FileOutputStream fos=new FileOutputStream(Path);
+		wb.write(fos);
+		fos.close();
+		
+
+	 }
+	
+	
+	
+
+	public static void contactdetailsPrivate(WebDriver driver,String Lastname,String Firstname,String phnumber) throws InterruptedException 
+	{
+		WebElement addbtn = driver.findElement(By.xpath("//button[@id='s_2_1_11_0_Ctrl']")); 
+        addbtn.click();
+        
+        alwayswait(2);
+               
+        WebElement lastnamebox = driver.findElement(By.xpath("//td[@id='1_s_2_l_Last_Name']"));
+        lastnamebox.click();
+        WebElement lastname = driver.findElement(By.xpath("//input[@id='1_Last_Name']"));
+      
+        lastname.sendKeys(Lastname);
+        
+        WebElement firstnamebox = driver.findElement(By.xpath("//td[@id='1_s_2_l_First_Name']"));
+        firstnamebox.click();
+        WebElement firstname = driver.findElement(By.xpath("//input[@id='1_First_Name']"));
+        firstname.sendKeys(Firstname);
+        
+        WebElement daynobox = driver.findElement(By.xpath("//td[@id='1_s_2_l_Contact_Phone_Number']"));
+        daynobox.click();
+        WebElement dayno = driver.findElement(By.xpath("//input[@id='1_Contact_Phone_Number']"));
+        dayno.sendKeys(phnumber);  
+        
+        
+        		
+	}
+	
+	
+	public static void contactdetailsBusiness(WebDriver driver,String Lastname,String Firstname,String phnumber) throws InterruptedException 
+	{
+		WebElement addbtn = driver.findElement(By.xpath("//button[@id='s_1_1_11_0_Ctrl']")); 
+        addbtn.click();
+        
+        alwayswait(2);
+               
+        WebElement lastnamebox = driver.findElement(By.xpath("//td[@id='1_s_1_l_Last_Name']"));
+        lastnamebox.click();
+        WebElement lastname = driver.findElement(By.xpath("//input[@id='1_Last_Name']"));
+      
+        lastname.sendKeys(Lastname);
+        
+        WebElement firstnamebox = driver.findElement(By.xpath("//td[@id='1_s_1_l_First_Name']"));
+        firstnamebox.click();
+        WebElement firstname = driver.findElement(By.xpath("//input[@id='1_First_Name']"));
+        firstname.sendKeys(Firstname);
+        
+        WebElement daynobox = driver.findElement(By.xpath("//td[@id='1_s_1_l_Contact_Phone_Number']"));
+        daynobox.click();
+        WebElement dayno = driver.findElement(By.xpath("//input[@id='1_Contact_Phone_Number']"));
+        dayno.sendKeys(phnumber);  
+        
+        
+        		
+	}
+	
+	public static void addressDetailsPrivate(WebDriver driver,String add1,String add2,String zip) 
+	{
+		WebElement addbtn = driver.findElement(By.xpath("//button[@id='s_3_1_11_0_Ctrl']"));  
+        addbtn.click();
+        WebElement address1box = driver.findElement(By.id("1_s_3_l_Street_Address")); 
+        address1box.click();
+        WebElement address1 = driver.findElement(By.id("1_Street_Address"));        
+        address1.sendKeys(add1);
+        
+        WebElement address2box = driver.findElement(By.id("1_s_3_l_Street_Address_2")); 
+        address2box.click();
+        WebElement address2 = driver.findElement(By.id("1_Street_Address_2"));
+        address2.sendKeys(add2);
+        
+        WebElement zipcodetxt = driver.findElement(By.xpath("//td[@id='1_s_3_l_Postal_Code']"));
+        zipcodetxt.click();
+        
+        WebElement zipcodetext = driver.findElement(By.xpath("//input[@id='1_Postal_Code']"));
+        zipcodetext.sendKeys(zip);   
+        
+        WebElement zipcodeplustxt = driver.findElement(By.xpath("//td[@id='1_s_3_l_Zip_Plus']"));
+        zipcodeplustxt.click(); 
+        
+        
+	}
+	
+	public static void addressDetailsBusiness(WebDriver driver,String add1,String add2,String zip) 
+	{
+		WebElement addbtn = driver.findElement(By.xpath("//button[@id='s_3_1_11_0_Ctrl']"));  
+        addbtn.click();
+        WebElement address1box = driver.findElement(By.id("1_s_3_l_Street_Address")); 
+        address1box.click();
+        WebElement address1 = driver.findElement(By.id("1_Street_Address"));        
+        address1.sendKeys(add1);
+        
+        WebElement address2box = driver.findElement(By.id("1_s_3_l_Street_Address_2")); 
+        address2box.click();
+        WebElement address2 = driver.findElement(By.id("1_Street_Address_2"));
+        address2.sendKeys(add2);
+        
+        WebElement zipcodetxt = driver.findElement(By.xpath("//td[@id='1_s_3_l_Postal_Code']"));
+        zipcodetxt.click();
+        
+        WebElement zipcodetext = driver.findElement(By.xpath("//input[@id='1_Postal_Code']"));
+        zipcodetext.sendKeys(zip);   
+        
+        WebElement zipcodeplustxt = driver.findElement(By.xpath("//td[@id='1_s_3_l_Zip_Plus']"));
+        zipcodeplustxt.click(); 
+        
+        
+	}
+	
+	
+	public static void replenishment(WebDriver driver,String accountype,String sheetpath, int Rownum) throws AWTException, EncryptedDocumentException, InvalidFormatException, IOException 
+	{
+		   WebElement addReplbtn = null;
+		    WebElement rebilltypefield = null;
+		    WebElement rebilltype = null;
+		    WebElement ccnumfield = null;
+		    WebElement ccnum = null;
+		    WebElement ccmonthfield = null;
+		    WebElement ccmonth = null;
+		    WebElement ccyearfield = null;
+		    WebElement ccyear = null;
+		    
+		    String Rpaytype = ExcelRead(accountype, sheetpath, Rownum, 16);
+		    String cnum = ExcelRead(accountype, sheetpath, Rownum, 17);
+		    String cmonth = ExcelRead(accountype, sheetpath, Rownum, 18);
+		    String cyear = ExcelRead(accountype, sheetpath, Rownum, 19);
+		    
+		    if(accountype.equals("Private"))
+		    {
+		    	addReplbtn= driver.findElement(By.id("s_2_1_12_0_Ctrl"));
+		    	addReplbtn.click();
+		        rebilltypefield = driver.findElement(By.id("1_s_2_l_Rebill_Pay_Type"));
+		        rebilltypefield.click();
+		        rebilltype = driver.findElement(By.id("1_Rebill_Pay_Type"));
+		        rebilltype.sendKeys(Rpaytype);
+		        ccnumfield = driver.findElement(By.id("1_s_2_l_Card_Number"));
+		        ccnumfield.click();	  
+		        ccnum = driver.findElement(By.id("1_Card_Number"));
+		        ccnum.sendKeys(cnum);
+		        ccmonthfield = driver.findElement(By.id("1_s_2_l_Expiration_Month"));
+		        ccmonthfield.click();	
+		        ccmonth = driver.findElement(By.id("1_Expiration_Month"));
+		        ccmonth.sendKeys(cmonth);
+		        ccyearfield = driver.findElement(By.id("1_s_2_l_Expiration_Year"));
+		        ccyearfield.click();
+		        ccyear = driver.findElement(By.id("1_Expiration_Year"));
+		        ccyear.sendKeys(cyear);
+		    }   	    
+		    else
+		    {
+		    	addReplbtn= driver.findElement(By.id("s_1_1_12_0_Ctrl"));
+		    	addReplbtn.click();
+		        rebilltypefield = driver.findElement(By.id("1_s_1_l_Rebill_Pay_Type"));
+		        rebilltypefield.click();
+		        rebilltype = driver.findElement(By.id("1_Rebill_Pay_Type"));
+		        rebilltype.sendKeys(Rpaytype);
+		        ccnumfield = driver.findElement(By.id("1_s_1_l_Card_Number"));
+		        ccnumfield.click();	  
+		        ccnum = driver.findElement(By.id("1_Card_Number"));
+		        ccnum.sendKeys(cnum);
+		        ccmonthfield = driver.findElement(By.id("1_s_1_l_Expiration_Month"));
+		        ccmonthfield.click();	
+		        ccmonth = driver.findElement(By.id("1_Expiration_Month"));
+		        ccmonth.sendKeys(cmonth);
+		        ccyearfield = driver.findElement(By.id("1_s_1_l_Expiration_Year"));
+		        ccyearfield.click();
+		        ccyear = driver.findElement(By.id("1_Expiration_Year"));
+		        ccyear.sendKeys(cyear);
+		    }
+		    
+		   savefunc();
+		
+	}
+	
+	
+	public static void vehciles(WebDriver driver,String accountype,String sheetpath, int Rownum) throws AWTException, InterruptedException, EncryptedDocumentException, InvalidFormatException, IOException 
+	{
+		WebElement addvehicle = null;
+	    WebElement platenumberfield = null;
+	    WebElement platenumber = null;
+	    WebElement plateyearfield = null;
+	    WebElement plateyear = null;
+	    WebElement platemakefield = null;
+	    WebElement platemake = null;
+	    WebElement platemodelfield = null;
+	    WebElement platemodel = null;
+	    
+	    alwayswait(2);
+	    
+	    
+	    String pname = ExcelRead(accountype, sheetpath, Rownum, 20);
+	    String pyear = ExcelRead(accountype, sheetpath, Rownum, 21);
+	    String pmake = ExcelRead(accountype, sheetpath, Rownum, 22);
+	    String pmodel = ExcelRead(accountype, sheetpath, Rownum, 23);
+	    
+	    
+	    
+	   
+	    	int i= 1;
+	    	addvehicle= driver.findElement(By.id("s_1_1_14_0_Ctrl"));
+	    	addvehicle.click();
+	    	platenumberfield = driver.findElement(By.id("1_s_1_l_Plate_Number"));
+	    	platenumberfield.click();
+	    	platenumber = driver.findElement(By.name("Plate_Number"));
+	    	platenumber.sendKeys(pname+i);
+	    	plateyearfield = driver.findElement(By.id("1_s_1_l_Year_of_Vehicle"));
+	    	plateyearfield.click();
+	    	plateyear = driver.findElement(By.id("1_Year_of_Vehicle"));
+	    	plateyear.sendKeys(pyear);
+	    	platemakefield = driver.findElement(By.id("1_s_1_l_Vehicle_Make"));
+	    	platemakefield.click();
+	    	platemake = driver.findElement(By.id("1_Vehicle_Make"));
+	    	platemake.sendKeys(pmake);
+	    	platemodelfield = driver.findElement(By.id("1_s_1_l_Vehicle_Model"));
+	    	platemodelfield.click();
+	    	platemodel = driver.findElement(By.id("1_Vehicle_Model"));
+	    	platemodel.sendKeys(pmodel);
+	    
+	    
+	    
+	    	
+	    	savefunc();
+	    	
+	    	alwayswait(4);
+	    	int value = driver.findElements(By.id("btn-accept")).size();
+	    	System.out.println("Value is " +value);
+	    	if(value>0)
+	    	{	
+	    	while(driver.findElement(By.id("btn-accept")).isDisplayed())
+	    	{
+	    		i++;
+	    		alwayswait(1);
+	    		
+	    		driver.findElement(By.id("btn-accept")).click();
+	    		plateyearfield.click();
+	    		platenumberfield.click();
+	    		platenumber = driver.findElement(By.name("Plate_Number"));
+	    		platenumber.clear();
+	    		platenumber.sendKeys(pname+i);    		
+	    		savefunc();
+	    		
+	    		alwayswait(4);
+	    	}
+	    	}
+	    	
+	    
+		
+	}
+	
+	
+	public static void devicerequest(WebDriver driver,String accountype,String sheetname,int Rownum) throws AWTException, EncryptedDocumentException, InvalidFormatException, IOException 
+	{
+		WebElement adddevicerequest = null;
+	    WebElement devicedescfield = null;
+	    WebElement devicedesc = null;
+	    WebElement modelselector = null;
+	    
+	    WebElement modelnumber = null;
+	    
+	    String drequesttype = ExcelRead(accountype, sheetname, Rownum, 24);
+	    String drequestvalue = ExcelRead(accountype, sheetname, Rownum, 25);
+	    
+	    
+	    if(accountype.equals("Private"))
+	    {
+	    	adddevicerequest= driver.findElement(By.id("s_2_1_11_0_Ctrl"));
+	    	adddevicerequest.click();
+	    	devicedescfield = driver.findElement(By.id("1_s_2_l_Smart_Issue_Id"));
+	    	devicedescfield.click();
+	    	devicedesc = driver.findElement(By.id("s_2_2_32_0_icon"));
+	    	devicedesc.click();
+	    	modelselector = driver.findElement(By.name("s_3_1_38_0"));
+	    	modelselector.clear();
+	    	modelselector.sendKeys(drequesttype);
+	    	modelnumber = driver.findElement(By.name("s_3_1_39_0"));
+	    	modelnumber.sendKeys(drequestvalue);
+	    	modelnumber.sendKeys(Keys.ENTER);    	
+	    	savefunc();
+	    }
+	    else
+	    {
+	    	adddevicerequest= driver.findElement(By.id("s_1_1_11_0_Ctrl"));
+	    	adddevicerequest.click();
+	    	devicedescfield = driver.findElement(By.id("1_s_1_l_Smart_Issue_Id"));
+	    	devicedescfield.click();
+	    	devicedesc = driver.findElement(By.id("s_1_2_32_0_icon"));
+	    	devicedesc.click();
+	    	modelselector = driver.findElement(By.name("s_3_1_38_0"));
+	    	modelselector.clear();
+	    	modelselector.sendKeys(drequesttype);
+	    	modelnumber = driver.findElement(By.name("s_3_1_39_0"));
+	    	modelnumber.sendKeys(drequestvalue);
+	    	modelnumber.sendKeys(Keys.ENTER);    	
+	    	savefunc();
+	    }
+		
+	}
+	
+	public static void addplan(WebDriver driver,String plantoadd) throws AWTException 
+	{
+		    WebElement adddPlan = null;
+	        WebElement planName = null;  	   
+	    	adddPlan= driver.findElement(By.id("s_3_1_12_0_Ctrl"));
+	    	adddPlan.click();
+	    	planName = driver.findElement(By.id("1_Plan_Name"));
+	    	planName.sendKeys(plantoadd);    	
+	    
+	    
+		
+	}
+	
+	
+	public static void addPaymentList(WebDriver driver,String accountype) throws AWTException, InterruptedException 
+	{
+		WebElement addPayment = null;
+		WebElement processPay = null;
+	       
+	    
+	    	alwayswait(10);
+	    	addPayment= driver.findElement(By.id("s_2_1_13_0_Ctrl"));
+	    	while(!addPayment.isEnabled())
+	    	{
+	    		addPayment= driver.findElement(By.id("s_2_1_13_0_Ctrl"));
+	    	}
+	    	addPayment.click();	
+	    	alwayswait(2);
+	    	savefunc();
+	    	alwayswait(2);
+	    	processPay= driver.findElement(By.xpath("//span[text()='Process Pay']"));
+	    	processPay.click();
+	    	alwayswait(5);
+	    	Robot r  = new Robot();
+		    r.keyPress(KeyEvent.VK_ENTER);
+	       
+	    	
+	    
+		
+	}
+	
+	
+	
+	
+	public static void savefunc() throws AWTException
+	{
+		    Robot r  = new Robot();
+		    r.keyPress(KeyEvent.VK_CONTROL);
+		    r.keyPress(KeyEvent.VK_S);
+		    r.keyRelease(KeyEvent.VK_CONTROL);
+		    r.keyRelease(KeyEvent.VK_S);
+	}
+	
+	
+	
+
+	public static void  main(String args[]) throws InterruptedException, AWTException, EncryptedDocumentException, InvalidFormatException, IOException
+	{
+		
+		String[] choices = { "Private", "Business", "Commerical" };
+	    String accountype = (String) JOptionPane.showInputDialog(null, "Choose now...",
+	            "Please select account type", JOptionPane.QUESTION_MESSAGE, null,choices,choices[0]);	   
+		System.setProperty("webdriver.chrome.driver", "E:\\Selenium\\chromedriver.exe");
+	    WebDriver driver = new ChromeDriver();
+	    String Sheetpath =  "E://TSG//Workspace//Account creation//Datasheet.xlsx";
+	    int i=1;
+	    int Rownum=1;
+	    String Dataused=ExcelRead(accountype, Sheetpath, i, 0);
+	    while(Dataused.equals("Y"))
+	    {	    	
+	    	i++;	
+	        Dataused = ExcelRead(accountype, Sheetpath, i, 0); 	    
+	        Rownum = i;	    
+	   
+	    }	
+	    
+	    System.out.println(Rownum);
+	    
+	    
+		String URL = ExcelRead(accountype, Sheetpath, Rownum, 1);
+		System.out.println(URL);
+	    driver.get(URL);
+	    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+	    driver.manage().window().maximize();
+	    WebElement username = driver.findElement(By.id("s_swepi_1"));
+	    WebElement password = driver.findElement(By.id("s_swepi_2"));
+	    WebElement Loginbtn = driver.findElement(By.xpath("//input[@value='Login']"));
+	    String uname = ExcelRead(accountype, Sheetpath, Rownum, 2);
+	    String pwd = ExcelRead(accountype, Sheetpath, Rownum, 3);
+	    username.sendKeys(uname);
+	    password.sendKeys(pwd);
+	    Loginbtn.click();
+	    alwayswait(60);
+	    
+	    WebElement accOpentab =driver.findElement(By.xpath("//a[contains(text(),'Account Opening')]"));
+	    accOpentab.click();
+	    
+	    alwayswait(10);
+	   // controlplus(driver, "N");
+	    
+	    String pin = ExcelRead(accountype,Sheetpath , Rownum, 5);
+	    String companyname = ExcelRead(accountype, Sheetpath, Rownum,6);
+	    String fname = ExcelRead(accountype, Sheetpath, Rownum, 7);
+	    String lname = ExcelRead(accountype, Sheetpath, Rownum, 8);
+	    String Phone = ExcelRead(accountype, Sheetpath, Rownum, 9);
+	    String Address1 = ExcelRead(accountype, Sheetpath, Rownum, 10);
+	    String Address2 = ExcelRead(accountype, Sheetpath, Rownum, 11);
+	    String pincode = ExcelRead(accountype, Sheetpath, Rownum, 12);
+	    
+	    
+	    if(accountype.equals("Private"))
+	    {	
+	    	
+	   	    generaldetails(driver, pin,1, companyname,Sheetpath,Rownum);
+	   	    contactdetailsPrivate(driver,fname,lname,Phone);
+		    addressDetailsPrivate(driver, Address1, Address2, pincode);
+		    
+	    }
+	    else if(accountype.equals("Business"))
+	    {
+	    	generaldetails(driver, pin,2, companyname,Sheetpath,Rownum);
+	    	contactdetailsBusiness(driver,fname,lname,Phone);
+		    addressDetailsPrivate(driver, Address1, Address2, pincode);
+	    }
+	    else 
+	    {
+	    	generaldetails(driver, pin,3, companyname,Sheetpath,Rownum);
+	    	contactdetailsBusiness(driver,fname,lname,Phone);
+	    	addressDetailsBusiness(driver, Address1, Address2, pincode);
+	    }
+	    	
+	   	    
+	    
+	    
+	   // WebElement savebtn = driver.findElement(By.xpath("//button[@id='s_3_1_16_0_Ctrl']"));
+	   // savebtn.click();
+	    
+	   savefunc();
+	    WebElement Replenishments =driver.findElement(By.xpath("//li[a[text()='Replenishments']]"));
+	    alwayswait(2);
+	    Replenishments.click();
+	    replenishment(driver,accountype,Sheetpath,Rownum);
+	    
+	   // Alert a =  driver.switchTo().alert();
+	   // a.accept();
+	 
+	    
+	    	WebElement vehicles =driver.findElement(By.xpath("//li[a[text()='Vehicles']]"));
+		    alwayswait(2);
+		    vehicles.click();
+		    vehciles(driver,accountype,Sheetpath,Rownum);
+		    WebElement devicerequest =driver.findElement(By.xpath("//li[a[text()='Device Request']]"));
+		    alwayswait(2);
+		    devicerequest.click();
+		    devicerequest(driver,accountype,Sheetpath,Rownum);
+		    WebElement plans =driver.findElement(By.xpath("//li[a[text()='Plans']]"));
+		    alwayswait(2);
+		    plans.click();
+		    if(!accountype.equals("PRIVATE"))
+		    {
+		    addplan(driver,"Business");
+		    WebElement business = driver.findElement(By.xpath("//li[text()='BUSINESS']"));
+		    business.click();
+		    
+		    }
+		    WebElement paybtn = null;
+		    paybtn = driver.findElement(By.xpath("//span[text()='Pay']"));
+	    	paybtn.click();
+		    addPaymentList(driver, accountype);
+		    
+		    alwayswait(10);
+		    Alert a = driver.switchTo().alert();
+		    a.accept();
+		    alwayswait(10);
+		    
+		    
+		     
+		    
+		   String accountNumber = driver.findElement(By.name("s_1_1_30_0")).getAttribute("value");;
+		   System.out.println("accountnumber is "+accountNumber);
+		   ExcelWrite(accountype, Sheetpath, Rownum, 0, "Y"); 
+		  
+		    
+	    
+	    }
+	    
+	      		
+	}
+	
+
+
+

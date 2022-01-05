@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="D:/TSG/Selenium/jars/commons-codec-1.10.jar"/>
+	<classpathentry kind="lib" path="D:/TSG/Selenium/jars/commons-collections4-4.1.jar"/>
+	<classpathentry kind="lib" path="D:/TSG/Selenium/jars/commons-logging-1.2.jar"/>
+	<classpathentry kind="lib" path="D:/TSG/Selenium/jars/commons-net-3.6.jar"/>
+	<classpathentry kind="lib" path="D:/TSG/Selenium/jars/commons-net-3.6-sources.jar"/>
+	<classpathentry kind="lib" path="D:/TSG/Selenium/jars/commons-net-examples-3.6.jar"/>
+	<classpathentry kind="lib" path="D:/TSG/Selenium/jars/curvesapi-1.04.jar"/>
+	<classpathentry kind="lib" path="D:/TSG/Selenium/jars/datafactory-0.8.jar"/>
+	<classpathentry kind="lib" path="D:/TSG/Selenium/jars/javafaker-0.2.jar"/>
+	<classpathentry kind="lib" path="D:/TSG/Selenium/jars/javafaker-0.13.jar"/>
+	<classpathentry kind="lib" path="D:/TSG/Selenium/jars/j-interop.jar"/>
+	<classpathentry kind="lib" path="D:/TSG/Selenium/jars/jPowerShell-1.8.jar"/>
+	<classpathentry kind="lib" path="D:/TSG/Selenium/jars/jsch-0.1.46.jar"/>
+	<classpathentry kind="lib" path="D:/TSG/Selenium/jars/junit-4.12.jar"/>
+	<classpathentry kind="lib" path="D:/TSG/Selenium/jars/log4j-1.2.17.jar"/>
+	<classpathentry kind="lib" path="D:/TSG/Selenium/jars/mysql-connector-java-6.0.6.jar"/>
+	<classpathentry kind="lib" path="D:/TSG/Selenium/jars/ojdbc7.jar"/>
+	<classpathentry kind="lib" path="D:/TSG/Selenium/jars/ojdbc14-10g.jar"/>
+	<classpathentry kind="lib" path="D:/TSG/Selenium/jars/ostermillerutils-1.08.02.jar"/>
+	<classpathentry kind="lib" path="D:/TSG/Selenium/jars/ostermillerutils-1.08.02-javadoc.jar"/>
+	<classpathentry kind="lib" path="D:/TSG/Selenium/jars/ostermillerutils-1.08.02-sources.jar"/>
+	<classpathentry kind="lib" path="D:/TSG/Selenium/jars/poi-3.17-beta1.jar"/>
+	<classpathentry kind="lib" path="D:/TSG/Selenium/jars/poi-examples-3.17-beta1.jar"/>
+	<classpathentry kind="lib" path="D:/TSG/Selenium/jars/poi-excelant-3.17-beta1.jar"/>
+	<classpathentry kind="lib" path="D:/TSG/Selenium/jars/poi-ooxml-3.17-beta1.jar"/>
+	<classpathentry kind="lib" path="D:/TSG/Selenium/jars/poi-ooxml-schemas-3.17-beta1.jar"/>
+	<classpathentry kind="lib" path="D:/TSG/Selenium/jars/poi-scratchpad-3.17-beta1.jar"/>
+	<classpathentry kind="lib" path="D:/TSG/Selenium/jars/slf4j-simple-1.6.1.jar"/>
+	<classpathentry kind="lib" path="D:/TSG/Selenium/jars/ssh-java-wrapper-0.0.2.jar"/>
+	<classpathentry kind="lib" path="D:/TSG/Selenium/jars/xmlbeans-2.6.0.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk-13.0.2">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="D:/TSG/Selenium/jars/selenium-2.52.0/selenium-java-2.52.0.jar"/>
+	<classpathentry kind="lib" path="D:/TSG/Selenium/selenium-shutterbug-0.6.1.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

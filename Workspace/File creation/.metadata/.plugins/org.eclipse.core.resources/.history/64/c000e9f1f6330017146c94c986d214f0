@@ -1,0 +1,54 @@
+package Creationpages;
+
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.PageFactory;
+
+import com.relevantcodes.extentreports.ExtentReports;
+import com.relevantcodes.extentreports.ExtentTest;
+import com.vector.func.Genric;
+import com.vector.func.SuperBase;
+
+
+
+public class ConfirmationPage extends SuperBase {
+	
+	static Genric  g = new Genric();
+	
+	
+	public ConfirmationPage(WebDriver driver)
+	{
+		
+		this.driver = driver;
+	
+		PageFactory.initElements(driver, this);
+		
+	}
+		
+	
+	
+
+	
+	public void clickCompleteOrder(ExtentReports report,ExtentTest logger) 
+	{
+		try{
+			Thread.sleep(2000);
+		
+		WebElement completeOrder =driver.findElement(By.xpath("//button[@name='btnComplete']"));
+		completeOrder.click();	
+		r.addstep(driver, report, logger, "Pass",testcasenumber,"Plan Section Passed", false);
+		}
+		catch(Exception allexception)
+		{
+			r.addstep(driver, report, logger, "Pass",testcasenumber,"Plan Section Failed", true);
+			System.out.println("Error occured in filling Plan Section "+allexception.getMessage());		
+		}
+		
+		    
+	}
+	
+	
+
+}

@@ -1,0 +1,51 @@
+package Filetransfer;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.jinterop.dcom.core.JIComServer;
+import org.jinterop.dcom.core.JIProgId;
+import org.jinterop.dcom.core.JISession;
+
+import com.profesorfalken.jpowershell.PowerShell;
+import com.profesorfalken.jpowershell.PowerShellResponse;
+
+public class remoteconnect {
+
+	public static void main(String[] args) throws IOException {
+
+		
+//		 PowerShell powerShell = null;
+//		 powerShell = PowerShell.openSession();
+//		 
+//		  Map<String, String> config = new HashMap<String, String>();
+//		  config.put("-ComputerName", "TTOVDNJWINSBL3");
+//	      config.put("-user", "TTTSSDEV\\30196589");
+//	      config.put("-pass", "Siri@2021");
+//	       
+//	      PowerShellResponse response = null;
+//	      response = powerShell.executeCommand("Get-Process");
+//	      powerShell.configuration(config);
+//		  response = PowerShell.executeSingleCommand("ls");
+//	    		  
+////	    		  .executeScript("D:\\vector\\com\\VectorViolAcctCreation.bat");
+//	      System.out.println("List Processes:" + response.getCommandOutput());
+		
+		
+		JISession session = JISession.createSession("TTTSSDEV", "30196589", "Siri@2021");
+		session.useSessionSecurity(true);
+
+		// Execute command
+		JIComServer comStub = new JIComServer(JIProgId.valueOf("WScript.Shell"),"10.36.20.41", session);
+		IJIComObject unknown = comStub.createInstance();
+		final IJIDispatch shell =     (IJIDispatch)JIObjectFactory.narrowObject((IJIComObject)unknown.queryInterface(IJIDispatch.I ID));
+		JIVariant results[] = shell.callMethodA("Exec", new Object[]{new JIString("%comspec% /c asadmin.bat" )});
+		 
+
+	 }
+	
+	
+	
+}
+

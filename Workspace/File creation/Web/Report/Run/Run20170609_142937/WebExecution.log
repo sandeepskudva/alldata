@@ -1,0 +1,31 @@
+20170609_142941 : Starting testcase number : 001
+20170609_143021 : Private account signup...
+20170609_143045 : Account details Passed
+20170609_143112 : tags and Payments Page Passed
+20170609_143112 : STANDARD is added
+20170609_143113 : Plan adding Sucessfull
+20170609_143114 : Payment Section Passed
+20170609_143121 : Payment Confirmation Passed
+20170609_143206 : Order Confirmation Section Passed
+20170609_143206 : Account number created 2000198369763
+20170609_143206 : Ending testcase number : 001
+20170609_143206 : ******************************************
+20170609_143207 : Starting testcase number : 002
+20170609_143247 : Business account signup...
+20170609_143304 : Account details Passed
+20170609_143322 : tags and Payments Page Passed
+20170609_143322 : BUSINESS is added
+20170609_143323 : Plan adding Sucessfull
+20170609_143323 : Payment Section Passed
+20170609_143324 : Secondary Payments method adding Passed
+20170609_143332 : Payment Confirmation Passed
+20170609_143404 : Order Confirmation Section Passed
+20170609_143404 : Service Request 2-6035405511
+20170609_143407 : Ending testcase number : 002
+20170609_143407 : ******************************************
+20170609_143408 : Starting testcase number : 019
+20170609_143439 : Login module Sucessfull
+20170609_143504 : Login Executed Sucessfully
+20170609_143542 : Home Page navigation Failed
+20170609_143542 : Ending testcase number : 019
+20170609_143542 : ******************************************

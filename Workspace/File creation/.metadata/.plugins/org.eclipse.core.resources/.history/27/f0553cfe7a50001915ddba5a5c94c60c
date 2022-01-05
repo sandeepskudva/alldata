@@ -1,0 +1,48 @@
+package Filetransfer;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class createSJImageVDF {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		String LANE_TX_ID = "";
+		String Agencyid = "00700";
+		
+	}
+
+	public static String getTransactionData(String LANETXID) throws SQLException
+	{
+		
+		
+		
+			DriverManager.registerDriver( new oracle.jdbc.driver.OracleDriver()); 
+		    String dbURL = "jdbc:oracle:thin:@10.36.20.51:1521/njrbtst";
+		    String strUserID = "pbatch";
+		    String strPassword = "batchp"; 
+		    Connection c=DriverManager.getConnection(dbURL,strUserID,strPassword);
+		    
+		    String Statement = "SELECT EXTERN_PLAZA_ID FROM T_LANE WHERE LANE_ID IN (SELECT LANE_ID FROM T_VIOL_TX WHERE LANE_TX_ID = '"+""') "; 
+		    
+		    ResultSet rs = c.createStatement().executeQuery(Statement);
+		    String xfer = null;
+		   
+		    while(rs.next()){
+		    	xfer =rs.getString("CURDATE");  
+		    }
+		   
+		    if(xfer==null)
+		    {	
+		    	xfer = "NULL";		  
+
+		    }
+		  	    
+			c.close();
+			return xfer;
+		}
+	
+}

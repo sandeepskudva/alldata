@@ -1,0 +1,21 @@
+package Research;
+
+import java.lang.reflect.Method;
+import java.util.Set;
+
+import org.reflections.Reflections;
+
+
+
+public class classcheck {
+	
+	 public static void main(String[] args) throws ClassNotFoundException, NoSuchMethodException, SecurityException {
+	    	
+		 Reflections reflections = new Reflections("Testcases.accountCreationMaintenance");
+
+		 Set<? extends Object> allClasses = reflections.getClass();
+		 
+		
+	    }
+
+}

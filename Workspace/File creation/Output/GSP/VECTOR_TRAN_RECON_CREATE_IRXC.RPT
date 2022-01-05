@@ -1,0 +1,22 @@
+
+Date: Oct 25 2016
+
+|______________________________________________________|
+|   ****        IRXC FILE CREATION STATISTICS ****     |
+|______________________________________________________|
+
+Beginning processing at : Oct 25 2016 10:50:54 AM 
+
+OUTPUT SUMMARY : 
+Extern_file_id 33632679
+   IRXC file : /app/vector/data_files/qatp_output/022_015_20161025105056.IRXC    No. of records 5
+
+    IRXC file not complete. In T_ICRX_RECON 0, should be 5
+Extern_file_id 33632682
+   IRXC file : /app/vector/data_files/qatp_output/022_008_20161025105058.IRXC    No. of records 1
+
+    IRXC file not complete. In T_ICRX_RECON 0, should be 1
+	Total files created : 2
+
+
+Completed processing at -> Oct 25 2016 10:50:58 AM 

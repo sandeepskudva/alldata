@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring comment="Copy element &apos;FileCreationTRBig.java&apos; to &apos;Web/src/Research&apos;&#x0D;&#x0A;- Original project: &apos;FileCreation&apos;&#x0D;&#x0A;- Destination element: &apos;Web/src/Research&apos;&#x0D;&#x0A;- Original element: &apos;MacroBigFile.FileCreationTRBig.java&apos;" description="Copy compilation unit" destination="=Web/src&lt;Research" element1="/src&lt;MacroBigFile{FileCreationTRBig.java" files="0" flags="589830" folders="0" id="org.eclipse.jdt.ui.copy" policy="org.eclipse.jdt.ui.copyResources" stamp="1496839366074" units="1" version="1.0"/>
+</session>

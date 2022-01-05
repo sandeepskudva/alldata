@@ -1,0 +1,106 @@
+package webAccountCreation;
+
+
+import org.openqa.selenium.chrome.ChromeDriver;
+import com.relevantcodes.extentreports.ExtentReports;
+import com.relevantcodes.extentreports.ExtentTest;
+import com.vector.func.Genric;
+import com.vector.func.SuperBase;
+
+import Testcases.webAccountCreation.testcaseselector;
+
+public class driverScript extends SuperBase {
+	
+	
+	static ExtentReports report;
+	static ExtentTest logger;
+	public static void main(String[] args) throws Exception {
+		
+		try{
+		System.setProperty("webdriver.chrome.driver", "E:\\Selenium\\chromedriver.exe");
+		//System.setProperty("webdriver.ie.driver", "E:\\Selenium\\IEDriverServer.exe");
+		 
+		  String testcasestatus= "TestSuite";		
+		int i=1;
+	    int Rownum=1;
+	    int testcasecount=0;
+	    
+	    Genric g = new Genric();
+	    
+	   
+	    String runstatus  =g.ExcelRead(testcasestatus, Sheetpath, i, 1);
+	    
+	    
+	    report= new ExtentReports(reportpath);
+	    System.out.println("Report Path set : "+reportpath);
+	    
+	    
+		
+		
+	
+	    
+	    while (!runstatus.equals("END"))
+	    {
+	    	
+	    	runstatus = g.ExcelRead(testcasestatus, Sheetpath, i, 1); 
+	    	if(runstatus.equals("Y"))
+	    	{   		
+	    		final long startTime = System.currentTimeMillis();
+	    		testcasecount++;
+	    		
+	    	     
+	    	     System.out.println(runstatus);	    
+	    	      testcasenumber = g.ExcelRead(testcasestatus, Sheetpath, i, 0);
+	    	      String testcasedesc = g.ExcelRead(testcasestatus, Sheetpath, i, 2);
+	    	     System.out.println("Executing Testcase : "+testcasenumber);
+	    	   // logger = report.startTest("Testcase_"+testcasenumber);	
+	    	    logger = report.startTest("Testcase_"+testcasenumber,testcasedesc);	
+	    	    System.out.println("Testcase started : "+Rownum);
+	    	     
+	    	     testcaseselector ts = new testcaseselector();
+	    	      driver = new ChromeDriver();
+	    	     //driver = new FirefoxDriver();
+	    	     //driver = new InternetExplorerDriver();
+	    	    ts.selection(report,logger,testcasenumber,detail,Sheetpath, Rownum);   	
+	    	    report.endTest(logger);
+	    	    System.out.println("Testcase ended : "+testcasenumber);
+	        
+	    	final long endTime = System.currentTimeMillis();		
+	    	System.out.println("Time taken to execute test case "+testcasenumber+" is "+(endTime-startTime)/1000 + " Seconds");	
+	    	System.out.println(Rownum+"***************************************************************************************");
+	    	
+	    	}
+	    	
+	    	Rownum++; 
+	    	i++;	
+	    	
+	    	
+	    		  
+	    }	 
+	    if(testcasecount ==0)
+	    {
+	    	logger = report.startTest("NO Testcase");	
+	    }
+
+	    
+	   
+	}
+		catch(Exception allexception)
+		{
+			
+			System.out.println("Error occured in filling Plan Section "+allexception.getMessage());		
+			report.endTest(logger);
+			
+		}
+		finally
+		{
+			
+			report.flush();			
+		}
+	}
+	
+	
+
+}
+
+

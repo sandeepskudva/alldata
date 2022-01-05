@@ -1,0 +1,37 @@
+20170609_151727 : Starting testcase number : 003
+20170609_151801 : Private account signup...
+20170609_151814 : Account details Passed
+20170609_151828 : tags and Payments Page Passed
+20170609_151828 : STANDARD is added
+20170609_151828 : PACP is added
+20170609_151828 : ACE is added
+20170609_151829 : Plan adding Sucessfull
+20170609_151829 : Payment Section Passed
+20170609_151835 : Payment Confirmation Passed
+20170609_151901 : Order Confirmation Section Passed
+20170609_151901 : Account number created 2000198369771
+20170609_151902 : Ending testcase number : 003
+20170609_151902 : ******************************************
+20170609_151902 : Starting testcase number : 004
+20170609_151938 : Private account signup...
+20170609_151956 : Account details Passed
+20170609_152009 : tags and Payments Page Passed
+20170609_152009 : NYSBA is added
+20170609_152009 : Plan adding Sucessfull
+20170609_152010 : Payment Section Passed
+20170609_152015 : Payment Confirmation Passed
+20170609_152039 : Order Confirmation Section Passed
+20170609_152039 : Account number created 2000198369375
+20170609_152039 : Ending testcase number : 004
+20170609_152039 : ******************************************
+20170609_152040 : Starting testcase number : 019
+20170609_152113 : Login module Sucessfull
+20170609_152140 : Login Executed Sucessfully
+20170609_152144 : Login Sucessfull account number validated 2000198368971
+20170609_152144 : Home Page navigation Passed
+20170609_152149 : Increase Balance navigation Passed
+20170609_152153 : Entering Existing Card data Passed
+20170609_152203 : Payment Confirmation Passed
+20170609_152207 : Payment Verification Passed
+20170609_152207 : Ending testcase number : 019
+20170609_152207 : ******************************************

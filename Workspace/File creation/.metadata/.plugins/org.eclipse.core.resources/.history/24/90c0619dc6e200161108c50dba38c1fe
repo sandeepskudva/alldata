@@ -1,0 +1,85 @@
+package NoticeCreation;
+
+import java.awt.AWTException;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.Date;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
+import javax.swing.JOptionPane;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.poi.EncryptedDocumentException;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+
+public class ACKPOSTACK {
+
+	
+	
+	
+	public static String query(String Statement,String value) throws SQLException
+	{
+		
+		DriverManager.registerDriver( new oracle.jdbc.driver.OracleDriver()); 
+		   String dbURL = "jdbc:oracle:thin:@(DESCRIPTION =(ADDRESS = (PROTOCOL = TCP)(HOST = 10.36.20.51)(PORT = 1521))(CONNECT_DATA = (SERVER = DEDICATED)(SERVICE_NAME = njrbtst)))";
+        String strUserID = "pbatch";
+        String strPassword = "batchp"; 
+        Connection c=DriverManager.getConnection(dbURL,strUserID,strPassword);      
+        	    
+	    ResultSet rs = c.createStatement().executeQuery(Statement);
+	    String target=null;
+	    while(rs.next()){
+	    	 target =rs.getString(value);   
+	    }
+	     
+	    return target;
+	}
+	
+	public static String getDate() {
+	    java.util.Date date = Calendar.getInstance().getTime();
+	    
+	    SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
+	    return sdf.format(date);
+	}
+	
+	public static void  main(String args[]) throws InterruptedException, AWTException, EncryptedDocumentException, InvalidFormatException, IOException, SQLException
+	{
+		
+		
+		String DATFILE =JOptionPane.showInputDialog("Please enter DAT Filename");
+		System.out.println("DAT FILE is "+DATFILE+".DAT");
+		
+		int n = JOptionPane.showConfirmDialog(null,"Enetered LANE_TX_ID is "+DATFILE+" Do you want to continue with notice creation ?","Please Confirm",JOptionPane.YES_NO_OPTION);
+    	
+    	if(n==JOptionPane.NO_OPTION){
+    	System.exit(0);
+    	}
+    	
+    	String Header1 ="H";
+    	String curdate= getDate();
+    	String blank ="                                                                                ";
+    	String RecordCount1 =query("select * from t_mailhouse_statistics where FILE_NAME ='" +DATFILE+".DAT'","MASTER_COUNT");
+    	String DRecordCount = "0000000000".substring(RecordCount1.length()) + RecordCount1;
+    	String HRecord = Header1+DATFILE+".DAT"+blank.substring((Header1+DATFILE+".DAT").length())+curdate+curdate+DRecordCount;
+    	System.out.println(HRecord);
+    	
+    	String Header2 ="S";
+    	String zip = DATFILE+"_001.ZIP";
+    	String RecordCount2 =query("select * from t_mailhouse_statistics where FILE_NAME ='" +DATFILE+".DAT'","DETAIL_COUNT");
+    	String SRecordCount = "0000".substring(RecordCount2.length()) + RecordCount2;
+    	String SRecord = Header2 + zip+blank.substring((Header2+zip).length())+SRecordCount;
+    	System.out.println(SRecord);
+    	
+    	String Header3 ="D";
+    	String accountnumber =
+    	
+    	
+    	
+    	
+	    
+	}   
+}

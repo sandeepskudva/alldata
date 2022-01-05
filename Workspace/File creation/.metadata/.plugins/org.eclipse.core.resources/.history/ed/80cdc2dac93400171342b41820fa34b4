@@ -1,0 +1,93 @@
+package Creationpages;
+
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+
+import com.relevantcodes.extentreports.ExtentReports;
+import com.relevantcodes.extentreports.ExtentTest;
+import com.vector.func.Genric;
+import com.vector.func.SuperBase;
+
+
+
+public class ConfirmationPage extends SuperBase {
+	
+	static Genric  g = new Genric();
+	
+	
+
+		
+	
+	
+
+	
+	@SuppressWarnings("finally")
+	public boolean clickCompleteOrder(ExtentReports report,ExtentTest logger) 
+	{
+		boolean status =true;
+		try{
+			Thread.sleep(2000);
+		
+		WebElement completeOrder =driver.findElement(By.xpath("//button[@name='btnComplete']"));
+		completeOrder.click();	
+		Thread.sleep(10000);
+		
+		}
+		catch(Exception allexception)
+		{
+			status=false;
+			System.out.println("Error occured in filling Plan Section "+allexception.getMessage());		
+		}
+		
+		finally
+		{
+			if(status)
+			{	
+			r.addstep(report,logger, "Pass", testcasenumber, "Confirmation Section Passed", false);
+			}
+			
+			else
+			
+			r.addstep(report, logger, "Fail", testcasenumber,"Confirmation Section failed", true);
+			return status;
+		}	
+		    
+	}
+	
+	@SuppressWarnings("finally")
+	public boolean captureaccountNumber(ExtentReports report,ExtentTest logger) 
+	{
+		boolean status =true;
+		try{
+					
+		WebElement congrats =driver.findElement(By.xpath("//h1[contains(.,'Account Number')]"));
+		String accountnumber =congrats.getText();
+		System.out.println(accountnumber);
+		
+		}
+		catch(Exception allexception)
+		{
+			status=false;
+			System.out.println("Error occured in account number"+allexception.getMessage());		
+		}
+		
+		finally
+		{
+			if(status)
+			{	
+			r.addstep(report,logger, "Pass", testcasenumber, "Account number created", true);
+			}
+			
+			else
+			
+			r.addstep(report, logger, "Fail", testcasenumber,"Account creation failed", true);
+			return status;
+		}
+		
+		    
+	}
+	
+	
+
+}

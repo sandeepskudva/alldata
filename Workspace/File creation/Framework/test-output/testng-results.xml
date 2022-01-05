@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testng-results skipped="0" failed="0" total="1" passed="1">
+  <reporter-output>
+  </reporter-output>
+  <suite name="Default suite" duration-ms="108294" started-at="2016-08-30T09:04:53Z" finished-at="2016-08-30T09:06:42Z">
+    <groups>
+    </groups>
+    <test name="Default test" duration-ms="108294" started-at="2016-08-30T09:04:53Z" finished-at="2016-08-30T09:06:42Z">
+      <class name="com.vector.testcases.testaccountLogin">
+        <test-method status="PASS" signature="precondition()[pri:0, instance:com.vector.testcases.testaccountLogin@e45f292]" name="precondition" is-config="true" duration-ms="77687" started-at="2016-08-30T14:34:53Z" finished-at="2016-08-30T14:36:11Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- precondition -->
+        <test-method status="PASS" signature="accountLogin()[pri:0, instance:com.vector.testcases.testaccountLogin@e45f292]" name="accountLogin" duration-ms="30426" started-at="2016-08-30T14:36:11Z" finished-at="2016-08-30T14:36:41Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- accountLogin -->
+        <test-method status="PASS" signature="postcondition()[pri:0, instance:com.vector.testcases.testaccountLogin@e45f292]" name="postcondition" is-config="true" duration-ms="134" started-at="2016-08-30T14:36:41Z" finished-at="2016-08-30T14:36:42Z">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- postcondition -->
+      </class> <!-- com.vector.testcases.testaccountLogin -->
+    </test> <!-- Default test -->
+  </suite> <!-- Default suite -->
+</testng-results>

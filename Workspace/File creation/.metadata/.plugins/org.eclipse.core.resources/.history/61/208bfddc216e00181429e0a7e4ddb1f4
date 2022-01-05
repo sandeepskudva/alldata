@@ -1,0 +1,15 @@
+package NoticeCreation;
+
+import java.util.Calendar;
+
+public class dateCheck {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		Calendar cal = Calendar.getInstance();
+		SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+
+	}
+
+}

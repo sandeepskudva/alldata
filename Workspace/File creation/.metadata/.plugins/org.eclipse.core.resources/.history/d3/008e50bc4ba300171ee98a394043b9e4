@@ -1,0 +1,22 @@
+package Filetransfer;
+
+
+
+
+public class remoteconnect {
+
+	public static void main(String[] args) {
+
+		
+		Runtime runtime = Runtime.getRuntime();
+        String filePath = ApplicationProperties.getPropertyValue("powershell.scripts.location");
+        String command;
+
+		
+		//Runtime.getRuntime().exec(new String[] {"cmd", "D:\\vector\\com\\VectorViolAcctCreation.bat"});
+	 }
+	
+	
+	
+}
+

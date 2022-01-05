@@ -1,0 +1,27 @@
+package ServiceNowTicket;
+
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class serviceNow {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		System.setProperty("webdriver.chrome.driver", "E:\\Selenium\\chromedriver.exe");
+	    WebDriver driver = new ChromeDriver();
+	    String URL ="https://conduent.service-now.com//itserviceportal";	    
+	    driver.get(URL);
+	    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+	    driver.manage().window().maximize();
+	    driver.findElement(By.id("username")).sendKeys("50004561");
+	    driver.findElement(By.name("login")).click();
+	    driver.findElement(By.id("Ecom_User_ID")).sendKeys("50004561");
+	    driver.findElement(By.id("Ecom_Password")).sendKeys("Rubina@112");loginButton2
+	    driver.findElement(By.name("login")).click();
+
+	}
+
+}

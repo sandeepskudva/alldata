@@ -1,0 +1,20 @@
+20170607_191821 : Starting testcase number : 001
+20170607_191900 : Private account signup...
+20170607_191929 : Account details Passed
+20170607_191950 : tags and Payments Page Passed
+20170607_192020 : Plan adding Failed
+20170607_192023 : Ending testcase number : 001
+20170607_192023 : ******************************************
+20170607_192023 : Starting testcase number : 002
+20170607_192056 : Business account signup...
+20170607_192111 : Account details Passed
+20170607_192130 : tags and Payments Page Passed
+20170607_192130 : BUSINESS is added
+20170607_192130 : Plan adding Sucessfull
+20170607_192131 : Payment Section Passed
+20170607_192131 : Secondary Payments method adding Passed
+20170607_192146 : Payment Confirmation Passed
+20170607_192212 : Order Confirmation Section Passed
+20170607_192212 : Service Request 2-6035358491
+20170607_192213 : Ending testcase number : 002
+20170607_192213 : ******************************************

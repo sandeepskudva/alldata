@@ -1,0 +1,17 @@
+package Safeform;
+
+public class clockAngle {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		double Currenttime = 1.30;
+		
+		int hour = abs(Currenttime);
+		java.lang.Math.abs(int a);
+		
+		
+
+	}
+
+}

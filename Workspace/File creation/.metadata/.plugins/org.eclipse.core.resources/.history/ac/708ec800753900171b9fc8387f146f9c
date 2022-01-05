@@ -1,0 +1,289 @@
+package Webpages;
+
+import java.io.IOException;
+
+import org.apache.poi.EncryptedDocumentException;
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import com.relevantcodes.extentreports.ExtentReports;
+import com.relevantcodes.extentreports.ExtentTest;
+import com.vector.func.Genric;
+import com.vector.func.SuperBase;
+
+public class editProfilePage extends SuperBase {
+	
+	
+	
+	
+	@SuppressWarnings("finally")
+	public boolean emailSection(ExtentReports report,ExtentTest logger, int Rownum) throws EncryptedDocumentException, InvalidFormatException, IOException
+	{
+		boolean status =true;
+		try{
+		Genric g = new Genric();
+		String newEmail = g.ExcelRead(detail, Sheetpath, Rownum, 11);
+		
+		WebElement emailaddress = driver.findElement(By.name("emailAddress"));
+		emailaddress.sendKeys(newEmail);
+		WebElement confirmEmailaddress = driver.findElement(By.name("reEmailAddress"));
+		confirmEmailaddress.sendKeys(newEmail);
+		WebElement updatebtn = driver.findElement(By.name("btnUpdate"));
+		updatebtn.click();
+		
+		WebElement pageverify = driver.findElement(By.xpath("//div[@class='alert alert-success message_tag']"));
+		
+		String pageloaded = pageverify.getText().trim();
+		Thread.sleep(2000);
+		
+		
+		if(pageloaded.equals("Account Details Updated Successfully."))
+		{
+			status=true;
+		}
+		else
+		{
+			status=false;
+			
+		}
+		
+		}
+		catch(Exception E)
+		{
+			status =false;			
+			System.out.println("Error occured in updating email"+E.getMessage());	
+		}
+		
+		finally
+		{
+			if(status)
+			{	
+			r.addstep(report,logger, "Pass", testcasenumber, "Email section updation Passed", true);
+			}
+			
+			else			
+			r.addstep(report, logger, "Fail", testcasenumber,"Email section updation Failed", true);
+			return status;
+			
+		}
+		
+	}
+	
+	@SuppressWarnings("finally")
+	public void emailactivation(ExtentReports report,ExtentTest logger, int Rownum) throws EncryptedDocumentException, InvalidFormatException, IOException
+	{
+		boolean status =true;
+		try{
+		Genric g = new Genric();
+		String newEmail = g.ExcelRead(detail, Sheetpath, Rownum, 11);
+		
+		WebElement emailaddress = driver.findElement(By.name("emailAddress"));
+		emailaddress.sendKeys(newEmail);
+		WebElement confirmEmailaddress = driver.findElement(By.name("reEmailAddress"));
+		confirmEmailaddress.sendKeys(newEmail);
+		WebElement updatebtn = driver.findElement(By.name("btnUpdate"));
+		updatebtn.click();
+		
+		WebElement pageverify = driver.findElement(By.xpath("//div[@class='alert alert-success message_tag']"));
+		
+		String pageloaded = pageverify.getText().trim();
+		Thread.sleep(2000);
+		
+		
+		if(pageloaded.equals("Account Details Updated Successfully."))
+		{
+			status=true;
+		}
+		else
+		{
+			status=false;
+			
+		}
+		
+		}
+		catch(Exception E)
+		{
+			status =false;			
+			System.out.println("Error occured in updating email"+E.getMessage());	
+		}
+		
+		finally
+		{
+			if(status)
+			{	
+			r.addstep(report,logger, "Pass", testcasenumber, "Email section updation Passed", true);
+			}
+			
+			else			
+			r.addstep(report, logger, "Fail", testcasenumber,"Email section updation Failed", true);
+			return status;
+			
+		}
+		
+	}
+	
+	
+	
+	
+	
+	
+	@SuppressWarnings("finally")
+	public boolean addSecondaryEmail(ExtentReports report,ExtentTest logger, int Rownum) throws EncryptedDocumentException, InvalidFormatException, IOException
+	{
+		boolean status =true;
+		try{
+		Genric g = new Genric();
+		String secondaryemail = g.ExcelRead(detail, Sheetpath, Rownum, 38);
+
+		
+		WebElement secondarylink = driver.findElement(By.id("secondaryEmailLink"));
+		secondarylink.click();
+		
+		WebElement secondaryaddress = driver.findElement(By.id("secondaryEmailAddress"));
+		secondaryaddress.sendKeys(secondaryemail);
+		
+		WebElement confirmsddress = driver.findElement(By.name("reEmailAddress"));
+		confirmsddress.sendKeys(secondaryemail);
+		
+		
+		WebElement updatebtn = driver.findElement(By.name("btnUpdate"));
+		updatebtn.click();
+		}
+		catch(Exception E)
+		{
+			status =false;			
+			System.out.println("Error occured in updating email"+E.getMessage());	
+		}
+		
+		finally
+		{
+			if(status)
+			{	
+			r.addstep(report,logger, "Pass", testcasenumber, "Email section updation Passed", true);
+			}
+			
+			else			
+			r.addstep(report, logger, "Fail", testcasenumber,"Email section updation Failed", true);
+			return status;
+			
+		}
+		
+	}
+	
+	
+	
+	@SuppressWarnings("finally")
+	public boolean addressSection(ExtentReports report,ExtentTest logger, int Rownum) throws EncryptedDocumentException, InvalidFormatException, IOException
+	{
+		boolean status =true;
+		try{
+		Genric g = new Genric();
+		String add1 = g.ExcelRead(detail, Sheetpath, Rownum, 5);
+	    String add2 = g.ExcelRead(detail, Sheetpath, Rownum, 6);
+	    String city = g.ExcelRead(detail, Sheetpath, Rownum, 7);
+	    String state = g.ExcelRead(detail, Sheetpath, Rownum, 8);
+	    String zip = g.ExcelRead(detail, Sheetpath, Rownum, 9);
+		
+		WebElement addresstxt1 = driver.findElement(By.name("addressLine1"));
+		addresstxt1.clear();
+		addresstxt1.sendKeys(add1);
+		WebElement addresstxt2 = driver.findElement(By.name("addressLine2"));
+		addresstxt2.clear();
+		addresstxt2.sendKeys(add2);
+		WebElement citytxt = driver.findElement(By.name("city"));
+		citytxt.clear();
+		citytxt.sendKeys(city);
+		WebElement statetxt = driver.findElement(By.name("stateType"));
+	    statetxt.sendKeys(state);
+		WebElement ziptxt = driver.findElement(By.name("zipCode"));
+		ziptxt.clear();
+		ziptxt.sendKeys(zip);
+		WebElement zipplustxt = driver.findElement(By.name("zipCodePlus"));		
+		zipplustxt.clear();
+		
+		Thread.sleep(2000);
+		
+		WebElement updatebtn = driver.findElement(By.xpath("//div[@class='profile_box']//button[@name='btnUpdate']"));
+		updatebtn.click();
+		
+		new WebDriverWait(driver, 30).until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@id='adrsModal']//div[@class='modal-dialog']")));
+		
+		WebElement standbox = driver.findElement(By.xpath("//div[@id='adrsModal']//div[@class='modal-dialog']"));
+		
+		r.addstepelement(report, logger, "PASS", testcasenumber, "Standardized Address",standbox);
+		
+		WebElement ok = driver.findElement(By.name("btnAcceptAddress"));
+		ok.click();
+		
+		WebElement pageverify = driver.findElement(By.xpath("//div[@class='alert alert-success message_tag']"));
+		
+		String pageloaded = pageverify.getText().trim();
+		Thread.sleep(2000);
+		
+		
+		if(pageloaded.equals("Account Details Updated Successfully."))
+		{
+			status=true;
+		}
+		else
+		{
+			status=false;
+			
+		}
+		
+				
+		
+		}
+		catch(Exception E)
+		{
+			status =false;			
+			System.out.println("Error occured in Login"+E.getMessage());	
+		}
+		
+		finally
+		{
+			if(status)
+			{	
+			r.addstep(report,logger, "Pass", testcasenumber, "Address section updation Passed", true);
+			}
+			
+			else			
+			r.addstep(report, logger, "Fail", testcasenumber,"Address section updation Failed", true);
+			return status;
+			
+		}
+		
+	}
+
+	public void contactSection(ExtentReports report,ExtentTest logger, int Rownum) throws EncryptedDocumentException, InvalidFormatException, IOException
+	{
+		Genric g = new Genric();
+		String phone = g.ExcelRead(detail, Sheetpath, Rownum, 12);	    
+		
+		WebElement cellphonetxt = driver.findElement(By.name("cellPhone"));
+		cellphonetxt.sendKeys(phone);	
+		
+		WebElement updatebtn = driver.findElement(By.name("btnUpdate"));
+		updatebtn.click();
+		
+	}
+	
+	public void statementSection(ExtentReports report,ExtentTest logger, int Rownum) throws EncryptedDocumentException, InvalidFormatException, IOException
+	{
+		Genric g = new Genric();
+		String statementtype = g.ExcelRead(detail, Sheetpath, Rownum, 13);
+		
+		Select statementdp = new Select(driver.findElement(By.xpath("//select[@name='statementType']")));
+		statementdp.selectByIndex(Integer.parseInt(statementtype));		
+		
+		WebElement updatebtn = driver.findElement(By.name("btnUpdate"));
+		updatebtn.click();
+		
+	}
+	
+	
+}

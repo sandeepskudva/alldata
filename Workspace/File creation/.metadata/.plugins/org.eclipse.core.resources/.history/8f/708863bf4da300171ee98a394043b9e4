@@ -1,0 +1,22 @@
+package Filetransfer;
+
+import java.io.IOException;
+
+public class remoteconnect {
+
+	public static void main(String[] args) throws IOException {
+
+		
+		
+		 powerShell = PowerShell.openSession();
+		
+		String command = "powershell.exe Invoke-Command -Credential TTTSSDEV\\30196589 Siri@2021 -ComputerName 10.36.20.41 -FilePath D:\\vector\\com\\VectorViolAcctCreation.bat";
+				 Process powerShellProcess = Runtime.getRuntime().exec(command);
+				 powerShellProcess.getOutputStream().close();
+		//Runtime.getRuntime().exec(new String[] {"cmd", "D:\\vector\\com\\VectorViolAcctCreation.bat"});
+	 }
+	
+	
+	
+}
+

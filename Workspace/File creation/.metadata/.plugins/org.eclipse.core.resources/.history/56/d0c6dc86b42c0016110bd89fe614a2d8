@@ -1,0 +1,177 @@
+package accountCreation;
+
+
+
+import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.ie.InternetExplorerDriver;
+import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+public class AccountCreation {
+	
+	
+	static void alwayswait(int timeinseconds) throws InterruptedException
+	{
+		Thread.sleep(timeinseconds * 1000);
+		System.out.println(timeinseconds+" seconds Wait is over");
+	}
+
+	static void controlplus(WebDriver driver,String character)
+	{
+		Actions actionObj = new Actions(driver);
+	    actionObj.keyDown(Keys.CONTROL)
+	             .sendKeys(Keys.chord(character))
+	             .keyUp(Keys.CONTROL)
+	             .perform();
+	}
+	
+	static void dropdown(WebDriver driver, WebElement element, String value)
+	{
+		Select select = new Select(element);
+	    select.deselectAll();
+	    select.selectByVisibleText(value);
+	}
+	
+	static void generaldetails(WebDriver driver, String pinnumber,int accounttype,String companyname) throws InterruptedException
+	{
+		
+		Switch(accounttype)
+		{
+		}
+		
+		WebElement addbtn = driver.findElement(By.xpath("//button[@id='s_2_1_50_0_Ctrl']")); 
+        addbtn.click();
+        alwayswait(5);
+	    WebElement pin = driver.findElement(By.xpath("//input[@name='s_2_1_24_0']"));
+	    pin.sendKeys(pinnumber);
+	    
+	    WebElement challengeAnswer = driver.findElement(By.xpath("//input[@name='s_2_1_41_0']"));
+	    challengeAnswer.sendKeys(pinnumber);
+	    //name="s_1_1_31_0
+	    
+	    WebElement accntType = driver.findElement(By.xpath("//input[@name='s_2_1_31_0']"));
+	    accntType.clear();
+	    accntType.sendKeys(accounttype);
+	    WebElement accntName = driver.findElement(By.xpath("//input[@name='s_2_1_30_0']"));
+	    accntName.sendKeys(companyname);
+	    
+	    WebElement dbaName = driver.findElement(By.xpath("//input[@name='s_2_1_9_0']"));
+	    dbaName.sendKeys(companyname);
+	    
+	    
+	    WebElement optionbtn = driver.findElement(By.id("s_at_m_2"));
+	    optionbtn.click();
+	    
+	    WebElement saveRrecord = driver.findElement(By.id("ui-id-130"));
+	    saveRrecord.click();
+		
+	}
+	
+	private static void Switch(String accounttype) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	static void contactdetails(WebDriver driver,String Lastname,String Firstname,String phnumber) 
+	{
+		WebElement addbtn = driver.findElement(By.xpath("//button[@id='s_1_1_11_0_Ctrl']")); 
+        addbtn.click();
+        
+        WebElement lastname = driver.findElement(By.id("1_Last_Name"));
+        lastname.sendKeys(Lastname);
+        
+        WebElement firstname = driver.findElement(By.id("1_First_Name"));
+        firstname.sendKeys(Firstname);
+        
+        WebElement dayno = driver.findElement(By.id("1_Phone_Number_Work"));
+        dayno.sendKeys(phnumber);  
+        
+        WebElement eveningno = driver.findElement(By.id("1_Phone_Number_Night"));
+        eveningno.sendKeys(phnumber);
+        
+        WebElement contactno = driver.findElement(By.id("1_Contact_Phone_Number"));
+        contactno.sendKeys("(121) 212-1212");
+        		
+	}
+	
+	static void addressDetails(WebDriver driver,String add1,String add2,String zip) 
+	{
+		WebElement addbtn = driver.findElement(By.xpath("//button[@id='s_3_1_11_0_Ctrl']")); 
+        addbtn.click();
+        
+        WebElement address1 = driver.findElement(By.id("1_Street_Address"));
+        address1.sendKeys(add1);
+        
+        WebElement address2 = driver.findElement(By.id("1_Street_Address_2"));
+        address2.sendKeys(add2);
+        
+        WebElement zipcode = driver.findElement(By.id("1_s_3_l_Postal_Code"));
+        zipcode.sendKeys(zip);        		
+	}
+	
+	
+	
+	
+
+	public static void main(String args[]) throws InterruptedException
+	{
+		
+		System.setProperty("webdriver.chrome.driver", "E:\\Selenium\\chromedriver.exe");
+	    WebDriver driver = new ChromeDriver();
+	    
+		
+	    driver.get("http://10.36.20.41//callcenter_enu/start.swe?");
+	    driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+	    driver.manage().window().maximize();
+	    WebElement username = driver.findElement(By.id("s_swepi_1"));
+	    WebElement password = driver.findElement(By.id("s_swepi_2"));
+	    WebElement Loginbtn = driver.findElement(By.xpath("//input[@value='Login']"));
+	    username.sendKeys("test3");
+	    password.sendKeys("Welcome1");
+	    Loginbtn.click();
+	    alwayswait(70);
+	    
+	    WebElement accOpentab =driver.findElement(By.xpath("//a[contains(text(),'Account Opening')]"));
+	    accOpentab.click();
+	 //   WebElement commerical = driver.findElement(By.xpath("//li[a[contains(text(),'Commercial')]]"));
+	 //   commerical.click();
+	    alwayswait(10);
+	   // controlplus(driver, "N");
+	   
+	    generaldetails(driver, "1234", "COMMERCIAL", "PEPSI");;
+	    contactdetails(driver,"Lname","Fname","(121) 212-1212");
+	    addressDetails(driver, "800 MONTROSE AVE", "SOUTH PLAINFIELD", "07080");
+	    
+	    WebElement Replenishments = driver.findElement(By.id("ui-id-225"));
+	    Replenishments.click();
+	    
+	    WebElement addReplbtn = driver.findElement(By.id("s_1_1_12_0_Ctrl"));
+	    addReplbtn.click();
+	    
+	    WebElement rebilltype = driver.findElement(By.id("1_Rebill_Pay_Type"));
+	    rebilltype.sendKeys("VISA");
+	    
+	    WebElement ccnum = driver.findElement(By.id("1_Card_Number"));
+	    ccnum.sendKeys("4111111111111111");
+	    
+	    WebElement ccmonth = driver.findElement(By.id("1_Expiration_Month"));
+	    ccmonth.sendKeys("8");
+	    
+	    WebElement ccyear = driver.findElement(By.id("1_Expiration_Year"));
+	    ccyear.sendKeys("2022");
+	    
+	      		
+	}
+	
+}
+
+

@@ -1,0 +1,18 @@
+package NoticeCreation;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
+public class dateCheck {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		int hoursToAdd = 2; //or from input
+		Calendar calendar = Calendar.getInstance();
+		calendar.add(Calendar.HOUR, hoursToAdd);
+		System.out.println(new SimpleDateFormat("yyyyMMddHHmmss").format(calendar.getTime()));
+
+	}
+
+}

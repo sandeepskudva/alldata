@@ -1,0 +1,70 @@
+package Creationpages;
+
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.PageFactory;
+
+import com.relevantcodes.extentreports.ExtentReports;
+import com.relevantcodes.extentreports.ExtentTest;
+import com.vector.func.SuperBase;
+import com.vector.func.reporting;
+
+
+
+public class signupPage  extends SuperBase {	
+
+
+	public signupPage()
+	{
+		
+		
+		PageFactory.initElements(driver, this);
+		
+	}
+	
+
+	
+	
+	public void CreatePrivate(ExtentReports report,ExtentTest logger) 
+	{
+		
+		try {
+	   WebElement agree =driver.findElement(By.xpath("//div[input[@id='agreeCheckbox1']]//ins[@class='iCheck-helper']"));
+		agree.click();
+		WebElement agreelink =driver.findElement(By.xpath("//a[@id='agreeLink1']/span"));
+		agreelink.click();
+		System.out.println("Private account signup..."); 
+		
+		
+		r.addstep(driver, report,logger, "Pass", testcasenumber, "Private account signup...", false);
+		}
+		catch(Exception allexception)
+		{
+			System.out.println("Error occured in filling Plan Section "+allexception.getMessage());			
+			r.addstep(driver, report, logger, "Fail", testcasenumber,"Plan section failed", true);
+		}
+
+	}
+	
+	public void CreateBusiness(ExtentReports report,ExtentTest logger,String testcasenumber) throws InterruptedException
+	{
+	        try{
+			WebElement agree =driver.findElement(By.xpath("//div[input[@id='agreeCheckbox2']]//ins[@class='iCheck-helper']"));
+		    agree.click();
+		    WebElement agreelink =driver.findElement(By.xpath("//a[@id='agreeLink2']/span"));
+		    agreelink.click();
+		    System.out.println("Business account signup..."); 
+		    
+	        }
+		    
+		    catch(Exception allexception)
+			{
+				System.out.println("Error occured in filling Plan Section "+allexception.getMessage());
+				r.addstep(driver, report, logger, "Fail", testcasenumber,"Plan section failed", true);
+				
+			}
+	
+	}
+
+}

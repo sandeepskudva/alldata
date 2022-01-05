@@ -1,0 +1,40 @@
+package Filetransfer;
+
+import java.io.IOException;
+import java.io.InputStream;
+
+
+public class remoteconnect {
+
+	public static void main(String[] args) throws IOException, InterruptedException {
+
+		
+		String ip ="10.36.20.41";
+		String userName = "TTTSSDEV\30196589"; 
+		String password = "Siri@2020";
+	
+		Process p = Runtime.getRuntime().exec("cmdkey /generic:"+ip+" /user:"+userName+" /pass:"+password );
+		p.destroy();
+
+		Runtime.getRuntime().exec("mstsc /v: "+ip+" /f /console");
+
+		Thread.sleep(2*60*1000); // min sec millisec
+		// deleting credentials
+		Process p1 = Runtime.getRuntime().exec("cmdkey /delete:"+ip);
+		p1.destroy();
+	 }
+	
+	
+	public void setAuthenticationInfo(String hostname, String username,     String password) {
+	      this.host = hostname; // $a1
+	      this.userid = username; // $a1
+	      this.password = password; // $a1
+	      this.logger = Logger.getLogger("TelnetConnection");
+	      this.logger.setLevel(Level.OFF);
+	      this.prefix = "AutomatedErrorInjector";
+	      this.recentCommand = ""; // $a1
+	      this.port = 23; // $a1
+	logger.finest("setting authentication info completed for host=" + host + " port=" + port);
+	}
+}
+

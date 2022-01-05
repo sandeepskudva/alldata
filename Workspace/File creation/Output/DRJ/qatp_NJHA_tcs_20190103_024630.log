@@ -1,0 +1,17 @@
+01-03-2019 02:46:32 tcs_extract_file_name                     ,Operation not permitted,No directory found in : v20181207131135002.tr
+
+01-03-2019 02:46:33 VECTOR_QRECON_CHECK_FILE    	   ,,vu_vector_qrecon.c at   286,Checking table T_RECONCILIATION_CHECKPOINT for filename: [v20181207131135002.tr                                                                                                   ]
+
+01-03-2019 02:46:33 VECTOR_QRECON_GET_CHECKPOINT	   ,,vu_vector_qrecon.c at   121,Inserting in T_RECONCILIATION_CHECKPOINT with <S>tart status
+
+01-03-2019 02:46:46 process_violation,,process_violation.c at   572,TAG RETRY is DISABLED 
+
+
+01-03-2019 02:46:46 process_violation.c,,process_violation.c at   432,SQL Error "-1843" query="violtx_create_viol_tx_rec(&sqlcode, aViolTxToInsert)",ORA-01843: not a valid month
+
+
+01-03-2019 02:46:46 process_violation,,process_violation.c at   437,Error Inserting VIOL_TX Record - oracle error code = -1843
+
+
+01-03-2019 02:46:46 VECTOR_QRECON_INSERT            ,,vu_vector_qrecon_insert.c at   334,Error in process_violation routine
+

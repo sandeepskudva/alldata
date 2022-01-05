@@ -1,0 +1,185 @@
+body {
+  
+      background-image: url("EZPASS.jpg"), url("/WebApp-01/WebContent/CSS/EZPASS.jpg");
+      background-color: lightblue;
+}
+
+h1 {
+    color: Gold;
+    text-align: center;
+}
+
+whi  {
+    display: block;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    padding: 4px 6px;
+    text-decoration: none;
+    font-size: 10px;
+}
+
+
+
+bla  {
+    display: block;
+    color: black;
+    font-weight: bold;
+    text-align: center;
+    padding: 4px 6px;
+    text-decoration: none;
+}
+
+p {
+    color: yellow;
+    font-family: verdana;
+    font-size: 20px;
+}
+
+form {
+
+  position: relative;
+  height: 100%;
+  background: -webkit-linear-gradient(top, rgba(146, 135, 187, 0.8) 0%, rgba(0, 0, 0, 0.6) 100%);
+  background: linear-gradient(to bottom, rgba(146, 135, 187, 0.8) 0%, rgba(0, 0, 0, 0.6) 100%);
+  -webkit-transition: opacity 0.1s, -webkit-transform 0.3s cubic-bezier(0.17, -0.65, 0.665, 1.25);
+  transition: opacity 0.1s, -webkit-transform 0.3s cubic-bezier(0.17, -0.65, 0.665, 1.25);
+  transition: opacity 0.1s, transform 0.3s cubic-bezier(0.17, -0.65, 0.665, 1.25);
+  transition: opacity 0.1s, transform 0.3s cubic-bezier(0.17, -0.65, 0.665, 1.25), -webkit-transform 0.3s cubic-bezier(0.17, -0.65, 0.665, 1.25);
+  -webkit-transform: scale(1);
+          transform: scale(1);
+
+
+}
+
+.loader {
+	position: fixed;
+	left: 0px;
+	top: 0px;
+	width: 100%;
+	height: 100%;
+	z-index: 9999;
+	background: url('loadingImg.gif') 50% 50% no-repeat rgb(249,249,249);
+}
+
+#top, #bottom, #left, #right {
+	background: #800040;
+	position: fixed;
+	}
+	#left, #right {
+		top: 0; bottom: 0;
+		width: 10px;
+		}
+		#left { left: 0; }
+		#right { right: 0; }
+		
+	#top, #bottom {
+		left: 0; right: 0;
+		height: 10px;
+		}
+		#top { top: 0; }
+		#bottom { bottom: 0; }
+		
+		.stitched {
+   padding: 5px;
+   margin: 5px;
+   background: #494949;
+   color: #fff;
+   font-size: 21px;
+   font-weight: bold;
+   line-height: 1.3em;
+   border: 2px dashed #fff;
+   border-radius: 10px;
+   box-shadow: 0 0 0 4px #ff8000, 2px 1px 6px 4px rgba(10, 10, 0, 0.5);
+   text-shadow: -1px -1px #aa3030;
+   font-weight: normal;
+}
+
+body {
+  padding: 1px;
+}
+
+nav {
+	width: 960px;
+	height: 100px;
+	margin: 120px auto;
+	text-align: center;
+}
+.top-menu li {
+	display: inline-block;
+	text-align: center;
+	margin: 30px 5px;
+	position: relative;
+	-webkit-transition: all 0.3s ease; 
+	-moz-transition: all 0.3s ease;
+	-o-transition: all 0.3s ease;
+}
+.top-menu li:hover {
+	margin: 30px 20px; 
+}
+.top-menu li:active {
+	margin: 30px 33px; 
+}
+.top-menu li a  {
+	width: 100px;
+	height: 100px;
+	z-index: 9999;
+	position: absolute;
+	top: 35px;
+	font-weight: bold;
+	display: block;
+	text-decoration: none;
+	font-size: 15px;
+	color: #fff;
+	text-shadow: 0px 1px 1px rgba(0,0,0,0.4), 0px 4px 6px rgba(0,0,0,0.1), 0px 9px 11px rgba(0,0,0,0.1);
+	-webkit-transition: all 0.1s linear; 
+	-moz-transition: all 0.1s linear;
+	-o-transition: all 0.1s linear;
+}
+.top-menu li:active a {
+	font-size: 26px;
+	top: 30px;
+	text-shadow: none;
+}
+.top-menu li div.menu-item {	
+	width: 100px;
+	height: 100px;
+	display: block;
+	-webkit-transition: all 0.2s ease; 
+	-moz-transition: all 0.2s ease;
+	-o-transition: all 0.2s ease;
+	-webkit-border-top-left-radius: 100px; 
+	-webkit-border-bottom-right-radius: 100px; 
+	-moz-border-radius-topleft: 100px; 
+	-moz-border-radius-bottomright: 100px; 
+	border-top-left-radius: 100px; 
+	border-bottom-right-radius: 100px;
+	-webkit-transform: rotate(45deg);
+	-moz-transform: rotate(45deg);
+	-o-transform: rotate(45deg);
+}
+.top-menu li:hover div.menu-item{ 
+	-webkit-border-top-left-radius: 80px; 
+	-webkit-border-bottom-right-radius: 80px; 
+	-moz-border-radius-topleft: 80px; 
+	-moz-border-radius-bottomright: 80px; 
+	border-top-left-radius: 80px; 
+	border-bottom-right-radius: 80px; 
+		-webkit-transform: rotate(225deg);
+	-moz-transform: rotate(225deg);
+	-o-transform: rotate(225deg);
+}
+.top-menu li:active div.menu-item{ 
+	-webkit-border-top-left-radius: 50px; 
+	-webkit-border-bottom-right-radius: 50px; 
+	-moz-border-radius-topleft: 50px; 
+	-moz-border-radius-bottomright: 50px; 
+	border-top-left-radius: 50px; 
+	border-bottom-right-radius: 50px; 
+
+}
+#home { background: #41D05F; }
+#CreateNew { background: #E42B2B; }
+#OpenExisting { background: #ff0080; }
+#contact { background: #49a7f3; }
+#About { background: #a800ff; }

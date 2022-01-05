@@ -1,0 +1,25 @@
+
+public class checkProgram {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		String text = "111";
+		System.Out.println(ispalindrome(text));
+	}
+
+	
+	public static boolean ispalindrome(String text)
+	{
+		String reverse = null;
+		for (int i = text.length(); i >= 0; i--)
+		reverse = reverse + text.charAt(i);  
+		
+		if(text==reverse)
+		return true;
+		else		
+		return false;
+		
+		
+	}
+}

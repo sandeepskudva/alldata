@@ -1,0 +1,13 @@
+package Filetransfer;
+
+public class AREC {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		String RecordCount = "2";
+		int rec = Integer.parseInt(RecordCount) +2;
+		String ARecordCount = "0000000000".substring(RecordCount.length()) + rec;
+		System.out.println(ARecordCount);
+	}
+
+}

@@ -1,0 +1,22 @@
+
+public class checkProgram {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		System.out.println("Hello World");
+	}
+
+	
+	public static boolean ispalindrome(String text)
+	{
+		String reverse;
+		for (int i = text.length(); i >= 0; i--)
+		reverse = reverse + text.charAt(i);  
+		
+		
+		return false;
+		
+		
+	}
+}

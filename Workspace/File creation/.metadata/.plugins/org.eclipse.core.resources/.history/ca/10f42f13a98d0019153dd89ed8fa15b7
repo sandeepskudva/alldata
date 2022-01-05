@@ -1,0 +1,16 @@
+package accountCreation;
+
+public class createPaymentFile {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		String Agencyname = "GSP";
+		String FileOperation = "Payment";
+		String CitationNumber = "T12";
+		String 
+		String Filedate = ""
+		
+	}
+
+}

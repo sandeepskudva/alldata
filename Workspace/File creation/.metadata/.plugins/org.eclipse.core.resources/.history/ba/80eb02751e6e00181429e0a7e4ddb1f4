@@ -1,0 +1,58 @@
+package NoticeCreation;
+
+
+
+public class createVTR {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		 String Filedate = "20180515";
+		 String HHMMSS = "003344";
+		 String YYYY = Filedate.substring(0, 4);
+		 String MM = Filedate.substring(4, 6);
+		 String DD = Filedate.substring(6, 8);
+		 String header = "H012.0";
+		
+		 String headertext = null; 
+	     String Trailertext= null;
+	     String Filename = null;
+	     
+	     String xfer = "90126789";
+	     String xfer10 = "00" + xfer;
+	     String AgencyID = "003";	     
+	     
+	     String RecordCount ="10";
+	     String ARecordCount = "00000000".substring(RecordCount.length()) + RecordCount;
+	     String Trailer = "T";
+	     String checksum = "e2ad";
+	     String Fileext =".tr";
+         Filename = "v" + YYYY + MM + DD + HHMMSS + AgencyID + Fileext;    
+         System.out.println(Filename);
+         headertext = header+ xfer10 + AgencyID + YYYY + MM+ DD + HHMMSS + ARecordCount;
+         System.out.println(headertext);
+         
+         String DetailRecord1="D2033000000010435118E 18e";
+         String Time1 = "20180601200000";
+         String DetailRecord2="0010084781900053581012 18E";
+         String Time2 = "20180601200000";
+         String DetailRecord3 ="";
+         String DetailRecord=null;
+         
+         for(int i=0;i<Integer.parseInt(RecordCount);i++)
+  	   {	
+        	 DetailRecord = DetailRecord1 + Time1 +DetailRecord2 +Time2 + DetailRecord3;
+  	   }
+  	   
+         
+         
+         
+          Trailertext = Trailer + ARecordCount + checksum;
+        
+     
+          System.out.println(Trailertext);
+
+
+	}
+
+}

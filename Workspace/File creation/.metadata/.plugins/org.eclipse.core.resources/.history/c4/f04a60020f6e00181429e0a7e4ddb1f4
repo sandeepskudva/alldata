@@ -1,0 +1,17 @@
+package NoticeCreation;
+
+public class createVTR {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		 String headertext = null;
+	     String Trailertext= null;
+	     String Filename = null;
+	    s
+		headertext = header+ version_number + xfer10 + AgencyID + YYYY + MM+ DD + HHMMSS + ARecordCount;
+        Trailertext = Trailer + ARecordCount + Checksum;
+        Filename = "v" + YYYY + MM + DD + HHMMSS + AgencyID + Fileext;
+
+	}
+
+}

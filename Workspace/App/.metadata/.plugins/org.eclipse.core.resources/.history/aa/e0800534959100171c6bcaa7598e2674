@@ -1,0 +1,90 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1" import="com.sch.pkg.*, java.util.*, java.lang.*, com.jcraft.jsch.*,org.apache.poi.*" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Schedular- QA</title>
+<link rel ="stylesheet" href="CSS/indexStyle.css">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="E://TSG/Workspace/App/WebApp-01/WebContent/WEB-INF/libjquery-3.1.1.min.js"></script>
+<script type="text/javascript">
+$(window).load(function() {
+	$(".loader").fadeOut("slow");
+	
+})
+
+</script>
+
+<script type="text/javascript">
+$(function(){
+	$("#uploadedFile").hide();
+	$("#CreateFile").click(function(){
+	 
+		$("#uploadedFile").show();	
+	});
+});
+	
+</script>
+
+<script>
+
+function cancelAction()
+{	
+document.location.href("CreateNew.jsp"); 
+}
+
+</script>
+
+
+</head>
+<body>
+<div class="loader"></div>
+<div id="left"></div>
+<div id="right"></div>
+<div id="top"></div>
+<div id="bottom"></div>
+<div class="loader"></div>
+<div class="stitched">
+<h1>Confirm Details Page</h1>
+</div>
+<nav>
+  <ul class="top-menu">
+    <li><a href="index.jsp">Home</a><div class="menu-item" id="home"></div></li>
+    <li><a href="CreateNew.jsp">Create New Set</a><div class="menu-item" id="CreateNew"></div></li>
+    <li><a href="ExistingViolations.jsp">OpenExisting</a><div class="menu-item" id="OpenExisting"></div></li>
+    <li><a href="contact.jsp">Contact</a><div class="menu-item" id="contact"></div></li>
+    <li><a href="about.jsp">About</a><div class="menu-item" id="About"></div></li>
+  </ul>
+</nav>
+<form font-size="75px;" >action = "XferFileCreation.jsp" method="get" onsubmit="return validate()"  >
+
+
+<% String filedate = request.getParameter("filedate");
+  String filetime = request.getParameter("filetime");
+     String Trxdate = request.getParameter("trxDate");  
+     String NumOfN =  request.getParameter("NumNotice"); 
+     String ViolCount =  request.getParameter("violnumber"); 
+     int count = Integer.parseInt(NumOfN) * Integer.parseInt(ViolCount);
+  %>
+  <table>
+   <tr><whi/>File Date : <%=filedate%></tr>
+   <tr><whi/>Transaction Date :<%=Trxdate%> </tr>
+   <tr><whi/>Number of Notices :<%=NumOfN%> </tr>
+   <tr><whi/>Total number of Violations in File :<%=count%> </tr>
+   <%=uploadFile.feedFile(filedate, filetime, Trxdate, count)%>   
+  
+  <tr><a href="" onclick="javascript:cancelAction();"><input type="button" value="Back" name="cancel"></a></tr>
+  <tr>    </tr>
+ <tr><a href="" onclick="javascript:cancelAction();"><input type="button" value="Back" name="cancel"></a></tr>
+ 
+  </table> <br>
+  
+  <%=uploadFile.createFile()%> 
+
+  
+</form>
+</body>
+</html>
+
+

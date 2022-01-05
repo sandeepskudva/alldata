@@ -1,0 +1,13 @@
+package Filetransfer;
+import java.util.regex.*;
+
+public class countofPattern {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+		
+		String sentence = "";
+
+	}
+
+}

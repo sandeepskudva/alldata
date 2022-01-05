@@ -1,0 +1,126 @@
+package Filetransfer;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Random;
+
+public class createSJImageVDF {
+
+	public static void main(String[] args) throws SQLException {
+		// TODO Auto-generated method stub
+
+		String LANE_TX_ID = "";
+		String Agencyid = "00700";
+		String plaza = getPlaza(LANE_TX_ID);
+		String lane = getLane(LANE_TX_ID);
+		String Direction = "e";
+		String vehicleSeqNum = vehicleSeq();
+		String YYYYMMDD = 
+		
+		
+	}
+
+	public static String getPlaza(String LANETXID) throws SQLException
+	{
+		
+		
+		
+			DriverManager.registerDriver( new oracle.jdbc.driver.OracleDriver()); 
+		    String dbURL = "jdbc:oracle:thin:@10.36.20.51:1521/njrbtst";
+		    String strUserID = "pbatch";
+		    String strPassword = "batchp"; 
+		    Connection c=DriverManager.getConnection(dbURL,strUserID,strPassword);
+		    
+		    String Statement = "SELECT EXTERN_PLAZA_ID FROM T_LANE WHERE PLAZA_ID IN (SELECT LANE_ID FROM T_VIOL_TX WHERE LANE_TX_ID = '"+LANETXID+"') "; 
+		    
+		    ResultSet rs = c.createStatement().executeQuery(Statement);
+		    String plaza = null;
+		   
+		    while(rs.next()){
+		    	plaza =rs.getString("EXTERN_PLAZA_ID");  
+		    }
+		   
+		    if(plaza==null)
+		    {	
+		    	plaza = "NULL";		  
+
+		    }
+		  	    
+			c.close();
+			return plaza;
+		}
+	
+	public static String getTimeStamp(String LANETXID,String Format) throws SQLException
+	{
+		
+		
+		
+			DriverManager.registerDriver( new oracle.jdbc.driver.OracleDriver()); 
+		    String dbURL = "jdbc:oracle:thin:@10.36.20.51:1521/njrbtst";
+		    String strUserID = "pbatch";
+		    String strPassword = "batchp"; 
+		    Connection c=DriverManager.getConnection(dbURL,strUserID,strPassword);
+		    
+		    String Statement = "SELECT TO_CHAR(TX_TIMESTAMP,'"+Format+"') FROM T_VIOL_TX WHERE LANE_TX_ID = '"+LANETXID+"'"; 
+		    
+		    ResultSet rs = c.createStatement().executeQuery(Statement);
+		    String plaza = null;
+		   
+		    while(rs.next()){
+		    	plaza =rs.getString("EXTERN_PLAZA_ID");  
+		    }
+		   
+		    if(plaza==null)
+		    {	
+		    	plaza = "NULL";		  
+
+		    }
+		  	    
+			c.close();
+			return plaza;
+		}
+	
+	public static String getLane(String LANETXID) throws SQLException
+	{
+		
+		
+		
+			DriverManager.registerDriver( new oracle.jdbc.driver.OracleDriver()); 
+		    String dbURL = "jdbc:oracle:thin:@10.36.20.51:1521/njrbtst";
+		    String strUserID = "pbatch";
+		    String strPassword = "batchp"; 
+		    Connection c=DriverManager.getConnection(dbURL,strUserID,strPassword);
+		    
+		    String Statement = "SELECT EXTERN_LANE_ID FROM T_LANE WHERE LANE_ID IN (SELECT LANE_ID FROM T_VIOL_TX WHERE LANE_TX_ID = '"+LANETXID+"') "; 
+		    
+		    ResultSet rs = c.createStatement().executeQuery(Statement);
+		    String lane = null;
+		   
+		    while(rs.next()){
+		    	lane =rs.getString("EXTERN_LANE_ID");  
+		    }
+		   
+		    if(lane==null)
+		    {	
+		    	lane = "NULL";		  
+
+		    }
+		  	    
+			c.close();
+			return lane;
+		}
+	
+	public static String vehicleSeq() throws SQLException
+	{
+	    String num= null;    
+	    Random r = new Random( System.currentTimeMillis() );
+	    return "00"+ ((1 + r.nextInt(6)) * 10000 + r.nextInt(10000));		
+		
+	}
+	
+		
+			
+	
+}

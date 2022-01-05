@@ -1,0 +1,49 @@
+package accountCreation;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+
+public class createPaymentFile {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+		String Agencyname = "GSP";
+		String FileOperation = "Payment";
+		String CitationNumber = "T12";
+		
+		
+		
+	}
+	
+	public String getLevel(String Noticenumber) throws SQLException
+	{
+		
+		DriverManager.registerDriver( new oracle.jdbc.driver.OracleDriver()); 
+	    String dbURL = "jdbc:oracle:thin:@10.36.20.51:1521/njaettst";
+	    String strUserID = "pbatch";
+	    String strPassword = "pbatch443"; 
+	    Connection c=DriverManager.getConnection(dbURL,strUserID,strPassword);
+	    
+	    String Statement = "select CITATION_LEVEL_CD from v_citation_detail where citation_number = 'T121201959116' and citation_level_cd  like  '%COLL%' and citation_Status_cd = 'OPEN'"; 
+	    
+	    ResultSet rs = c.createStatement().executeQuery(Statement);
+	    String plaza = null;
+	   
+	    while(rs.next()){
+	    	plaza =rs.getString("FORMAT");  
+	    }
+	   
+	    if(plaza==null)
+	    {	
+	    	plaza = "NULL";		  
+
+	    }
+	  	    
+		c.close();
+		return plaza;
+	}
+
+}
